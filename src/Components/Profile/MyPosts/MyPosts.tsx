@@ -15,8 +15,8 @@ const MyPosts = (props:MyPostsPropsType) => {
                 <button>post remove</button>
             </div>
             <div className={"posts"}>
-                <Post message={"Hello! how are you?"} likeCount = {"like 15"}/>
-                <Post message ={"Its my first post"} likeCount = {"like 20"}/>
+                <Post message={"Hello! how are you?"} likeCount = {15}/>
+                <Post message ={"Its my first post"} likeCount = {20}/>
             </div>
         </div>
     );
