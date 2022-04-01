@@ -1,21 +1,22 @@
 import React from 'react';
 import Post from "./Post/Post";
 
+type MyPostsPropsType = {
+    title:string
+}
 
-const MyPosts = () => {
+const MyPosts = (props:MyPostsPropsType) => {
     return (
         <div>
-            My posts
+            {props.title}
             <div>
                 <textarea></textarea>
                 <button>add post</button>
                 <button>post remove</button>
             </div>
             <div className={"posts"}>
-                <Post/>
-                <Post/>
-                <Post/>
-                <Post/>
+                <Post message={"Hello! how are you?"} likeCount = {"like 15"}/>
+                <Post message ={"Its my first post"} likeCount = {"like 20"}/>
             </div>
         </div>
     );

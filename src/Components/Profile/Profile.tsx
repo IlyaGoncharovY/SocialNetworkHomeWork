@@ -15,7 +15,7 @@ const Profile = () => {
             <div>
                 ava + description
             </div>
-            <MyPosts/>
+            <MyPosts title={"My posts"} />
         </div>
     );
 };
