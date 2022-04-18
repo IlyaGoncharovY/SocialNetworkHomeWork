@@ -10,7 +10,7 @@ import {Music} from "./Components/Music/Music";
 import {Settings} from "./Components/Settings/Settings";
 import {Navbar} from "./Components/Navbar/Navbar";
 
-/*// начинать с 21 урока.*/
+/*// начинать с 24 урока.*/
 
 const App = () => {
     return (
