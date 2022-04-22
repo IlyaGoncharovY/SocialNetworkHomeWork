@@ -6,6 +6,11 @@ type MyPostsPropsType = {
     title:string
 }
 
+const postData = [
+    {id:"1", message: "Hello! how are you?", likeCount: 15 },
+    {id:"2", message: "Its my first post", likeCount: 20}
+]
+
 const MyPosts = (props:MyPostsPropsType) => {
     return (
         <div className={s.postBlock}>
@@ -22,8 +27,8 @@ const MyPosts = (props:MyPostsPropsType) => {
                 </div>
             </div>
             <div className={s.posts}>
-                <Post message={"Hello! how are you?"} likeCount = {15}/>
-                <Post message ={"Its my first post"} likeCount = {20}/>
+                <Post message={postData[0].message} likeCount = {postData[0].likeCount}/>
+                <Post message ={postData[1].message} likeCount = {postData[1].likeCount}/>
             </div>
         </div>
     );
