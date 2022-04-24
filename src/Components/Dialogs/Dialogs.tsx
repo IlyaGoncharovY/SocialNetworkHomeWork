@@ -16,20 +16,33 @@ const messageData = [
     {id:"3", message: "vnature"},
 ]
 
+let dialogElements = dialogData.map(el => <DialogItem name={el.name} id={el.id} key={el.id}/>)
+//     [
+//     <DialogItem name={dialogData[0].name} id={dialogData[0].id}/>,
+//     <DialogItem name={dialogData[1].name} id={dialogData[1].id}/>,
+//     <DialogItem name={dialogData[2].name} id={dialogData[2].id}/>,
+//     <DialogItem name={dialogData[3].name} id={dialogData[3].id}/>
+// ]
+
+let messagesElement = messageData.map(el => <Message message={el.message} key={el.id}/>)
 
 const Dialogs = () => {
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                <DialogItem name={dialogData[0].name} id={dialogData[0].id}/>
+
+                {dialogElements}
+               {/* <DialogItem name={dialogData[0].name} id={dialogData[0].id}/>
                 <DialogItem name={dialogData[1].name} id={dialogData[1].id}/>
                 <DialogItem name={dialogData[2].name} id={dialogData[2].id}/>
-                <DialogItem name={dialogData[3].name} id={dialogData[3].id}/>
+                <DialogItem name={dialogData[3].name} id={dialogData[3].id}/>*/}
             </div>
             <div className={s.messages}>
-                <Message message={messageData[0].message}/>
-                <Message message={messageData[1].message}/>
-                <Message message={messageData[2].message}/>
+                {messagesElement}
+
+                {/*<Message message={messageData[0].message}/>*/}
+                {/*<Message message={messageData[1].message}/>*/}
+                {/*<Message message={messageData[2].message}/>*/}
             </div>
         </div>
     );
