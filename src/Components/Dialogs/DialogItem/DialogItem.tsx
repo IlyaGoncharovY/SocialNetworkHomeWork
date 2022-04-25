@@ -1,4 +1,4 @@
-import s from "./Dialogs.module.css";
+import s from "./DialogsItem.module.css";
 import {NavLink} from "react-router-dom";
 import React from "react";
 

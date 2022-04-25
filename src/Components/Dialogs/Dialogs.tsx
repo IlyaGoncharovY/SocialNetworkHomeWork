@@ -1,7 +1,7 @@
 import React from 'react';
 import s from "./Dialogs.module.css"
-import {Message} from "./Message";
-import {DialogItem} from "./DialogItem";
+import {Message} from "./Message/Message";
+import {DialogItem} from "./DialogItem/DialogItem";
 
 const dialogData = [
     {id: "1", name: "Ilya"},
@@ -26,7 +26,7 @@ let dialogElements = dialogData.map(el => <DialogItem name={el.name} id={el.id} 
 
 let messagesElement = messageData.map(el => <Message message={el.message} key={el.id}/>)
 
-const Dialogs = () => {
+export const Dialogs = () => {
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
@@ -48,4 +48,3 @@ const Dialogs = () => {
     );
 };
 
-export default Dialogs;

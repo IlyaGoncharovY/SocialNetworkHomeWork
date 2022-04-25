@@ -3,7 +3,7 @@ import './App.css';
 import Header from "./Components/Header/Header";
 
 import Profile from "./Components/Profile/Profile";
-import Dialogs from "./Components/Dialogs/Dialogs";
+import {Dialogs} from "./Components/Dialogs/Dialogs";
 import {Routes, Route, Link, BrowserRouter} from 'react-router-dom';
 import {News} from "./Components/News/News";
 import {Music} from "./Components/Music/Music";
