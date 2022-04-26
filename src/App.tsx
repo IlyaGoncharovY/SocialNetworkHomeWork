@@ -12,7 +12,48 @@ import {Navbar} from "./Components/Navbar/Navbar";
 
 /*// начинать с 24 урока.*/
 
-const App = () => {
+// type profilePropsType = {
+//   state:statePropsType[]
+// }
+
+type AppPropsType = {
+    appState: statePropsType
+}
+
+type statePropsType = {
+    profilePage: profilePageType
+    messagePage: messagePageType
+
+}
+
+type profilePageType = {
+    posts:postDataPropsType[]
+}
+
+type messagePageType = {
+    message:messagePropsType[]
+    dialog:dialogsPropsType[]
+}
+
+type postDataPropsType = {
+    id: string
+    message: string
+    likeCount: number
+}
+
+type dialogsPropsType = {
+    id: string
+    name: string
+}
+
+type messagePropsType = {
+    id: string
+    message: string
+}
+
+
+const App = (props: AppPropsType) => {
+
     return (
         <BrowserRouter>
             <div className={"app-wrapper"}>
@@ -20,8 +61,10 @@ const App = () => {
                 <Navbar/>
                 <div className={"app-wrapper-content"}>
                     <Routes>
-                        <Route path="/profile" element={<Profile/>}/>
-                        <Route path="/dialogs" element={<Dialogs/>}/>
+                        <Route path="/profile" element={<Profile profilePropsType={props.appState.profilePage.posts}/>}/>
+                        <Route path="/dialogs"
+                               element={<Dialogs dialogData={props.appState.messagePage.dialog}
+                                                 messageData={props.appState.messagePage.message}/>}/>
                         <Route path="/news" element={<News/>}/>
                         <Route path="/music" element={<Music/>}/>
                         <Route path="/settings" element={<Settings/>}/>

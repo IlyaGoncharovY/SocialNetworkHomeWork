@@ -3,20 +3,26 @@ import s from "./Dialogs.module.css"
 import {Message} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogItem";
 
-const dialogData = [
-    {id: "1", name: "Ilya"},
-    {id: "2", name: "Nastya"},
-    {id: "3", name: "Varya"},
-    {id: "4", name: "Aiki"}
-]
 
-const messageData = [
-    {id:"1", message: "hello"},
-    {id:"2", message: "ho ho ho"},
-    {id:"3", message: "vnature"},
-]
 
-let dialogElements = dialogData.map(el => <DialogItem name={el.name} id={el.id} key={el.id}/>)
+type DialogsPropsType = {
+    dialogData:dialogData[]
+    messageData:messageData[]
+}
+
+type dialogData = {
+    id: string
+    name:string
+}
+
+type messageData = {
+    id: string
+    message:string
+}
+
+export const Dialogs = (props:DialogsPropsType) => {
+
+    let dialogElements = props.dialogData.map(el => <DialogItem name={el.name} id={el.id} key={el.id}/>)
 //     [
 //     <DialogItem name={dialogData[0].name} id={dialogData[0].id}/>,
 //     <DialogItem name={dialogData[1].name} id={dialogData[1].id}/>,
@@ -24,9 +30,7 @@ let dialogElements = dialogData.map(el => <DialogItem name={el.name} id={el.id} 
 //     <DialogItem name={dialogData[3].name} id={dialogData[3].id}/>
 // ]
 
-let messagesElement = messageData.map(el => <Message message={el.message} key={el.id}/>)
-
-export const Dialogs = () => {
+    let messagesElement = props.messageData.map(el => <Message message={el.message} key={el.id}/>)
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
