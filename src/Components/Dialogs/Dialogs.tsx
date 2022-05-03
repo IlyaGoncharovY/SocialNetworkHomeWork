@@ -3,8 +3,6 @@ import s from "./Dialogs.module.css"
 import {Message} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogItem";
 
-
-
 type DialogsPropsType = {
     dialogData:dialogData[]
     messageData:messageData[]
@@ -42,7 +40,6 @@ export const Dialogs = (props:DialogsPropsType) => {
             </div>
             <div className={s.messages}>
                 {messagesElement}
-
                 {/*<Message message={messageData[0].message}/>*/}
                 {/*<Message message={messageData[1].message}/>*/}
                 {/*<Message message={messageData[2].message}/>*/}

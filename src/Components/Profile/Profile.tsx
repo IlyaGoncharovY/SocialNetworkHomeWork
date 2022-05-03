@@ -13,7 +13,6 @@ type postDataPropsType = {
 }
 
 const Profile = (props: postDataPropsType) => {
-
     return (
         <div>
             <ProfileInfo/>

@@ -4,13 +4,13 @@ import Header from "./Components/Header/Header";
 
 import Profile from "./Components/Profile/Profile";
 import {Dialogs} from "./Components/Dialogs/Dialogs";
-import {Routes, Route, Link, BrowserRouter} from 'react-router-dom';
+import {Routes, Route, BrowserRouter} from 'react-router-dom';
 import {News} from "./Components/News/News";
 import {Music} from "./Components/Music/Music";
 import {Settings} from "./Components/Settings/Settings";
 import {Navbar} from "./Components/Navbar/Navbar";
 
-/*// начинать с 24 урока.*/
+/*// начинать с 31 урока.*/
 
 // type profilePropsType = {
 //   state:statePropsType[]
