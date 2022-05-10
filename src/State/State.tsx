@@ -1,4 +1,5 @@
 import React from "react";
+import {renderThree} from "../render";
 
 export let state = {
     profilePage: {
@@ -31,4 +32,5 @@ export let addPost = (postMessage:string) => {
         likeCount: 0
     }
     state.profilePage.posts.push(newPost)
+    renderThree(state)
 }

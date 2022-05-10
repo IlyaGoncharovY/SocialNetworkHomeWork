@@ -16,7 +16,7 @@ import {Navbar} from "./Components/Navbar/Navbar";
 //   state:statePropsType[]
 // }
 
-type AppPropsType = {
+export type AppPropsType = {
     appState: statePropsType
     addPost: (postMessage: string)=>void
 }

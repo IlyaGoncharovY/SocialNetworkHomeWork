@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef} from 'react';
 import Post from "./Post/Post";
 import s from "./MyPosts.module.css"
 
@@ -31,7 +31,6 @@ const MyPosts = (props: MyPostsPropsType) => {
     let newPostElement = useRef<HTMLTextAreaElement>(null);
 
     let onClickHandlerAddPost = () => {
-        debugger
         let text = newPostElement.current;
         if(text) {
             props.addPost(text.value)
