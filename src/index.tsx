@@ -3,14 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {state} from "./State/State";
+import {addPost, state} from "./State/State";
 
+
+// addPost("opan`ki")
 
 ReactDOM.render(
     <React.StrictMode>
-        <App appState={state}/>
+        <App appState={state} addPost={addPost}/>
     </React.StrictMode>,
-
     document.getElementById('root')
 );
 

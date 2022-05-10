@@ -18,6 +18,7 @@ import {Navbar} from "./Components/Navbar/Navbar";
 
 type AppPropsType = {
     appState: statePropsType
+    addPost: (postMessage: string)=>void
 }
 
 type statePropsType = {
@@ -27,12 +28,12 @@ type statePropsType = {
 }
 
 type profilePageType = {
-    posts:postDataPropsType[]
+    posts: postDataPropsType[]
 }
 
 type messagePageType = {
-    message:messagePropsType[]
-    dialog:dialogsPropsType[]
+    message: messagePropsType[]
+    dialog: dialogsPropsType[]
 }
 
 type postDataPropsType = {
@@ -61,7 +62,8 @@ const App = (props: AppPropsType) => {
                 <Navbar/>
                 <div className={"app-wrapper-content"}>
                     <Routes>
-                        <Route path="/profile" element={<Profile profilePropsType={props.appState.profilePage.posts}/>}/>
+                        <Route path="/profile" element={<Profile profilePropsType={props.appState.profilePage.posts}
+                                                                 addPost={props.addPost}/>}/>
                         <Route path="/dialogs"
                                element={<Dialogs dialogData={props.appState.messagePage.dialog}
                                                  messageData={props.appState.messagePage.message}/>}/>

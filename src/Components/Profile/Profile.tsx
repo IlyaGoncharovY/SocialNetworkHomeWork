@@ -1,6 +1,7 @@
 import React from 'react';
 import MyPosts from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
+import {addPost} from "../../State/State";
 
 type profilePropsType = {
     id: string
@@ -10,13 +11,17 @@ type profilePropsType = {
 
 type postDataPropsType = {
     profilePropsType: profilePropsType[]
+    addPost:(postMessage: string)=>void
 }
 
 const Profile = (props: postDataPropsType) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts title={"My posts"} postDataPropsType={props.profilePropsType}/>
+            <MyPosts title={"My posts"}
+                     postDataPropsType={props.profilePropsType}
+                     addPost={addPost}
+            />
         </div>
     );
 };

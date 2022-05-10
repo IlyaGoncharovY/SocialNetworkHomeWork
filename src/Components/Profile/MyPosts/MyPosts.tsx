@@ -1,10 +1,11 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import Post from "./Post/Post";
 import s from "./MyPosts.module.css"
 
 type MyPostsPropsType = {
     title: string
     postDataPropsType: postDataPropsType[]
+    addPost:(postMessage: string)=>void
 }
 
 type postDataPropsType = {
@@ -19,16 +20,22 @@ type postDataPropsType = {
 //
 // ]
 
+
 const MyPosts = (props: MyPostsPropsType) => {
 
     let postsElement = props.postDataPropsType.map(el => <Post message={el.message} likeCount={el.likeCount}
                                                                key={el.id}/>)
 
-    let newPostElement = useRef(null);
+  //  let [message, setMessage] = useState<string>()
 
-    let onClickHandlerAddPost =()=>{
+    let newPostElement = useRef<HTMLTextAreaElement>(null);
+
+    let onClickHandlerAddPost = () => {
+        debugger
         let text = newPostElement.current;
-        alert(text)
+        if(text) {
+            props.addPost(text.value)
+        }
     }
 
     return (
@@ -37,7 +44,7 @@ const MyPosts = (props: MyPostsPropsType) => {
             <div>
                 <div>
                     {/*<input ref={newPostElement}></input>*/}
-                    <textarea ref={newPostElement}></textarea>
+                    <textarea ref={newPostElement}/>
                 </div>
                 <div>
                     <button onClick={onClickHandlerAddPost}>add post</button>

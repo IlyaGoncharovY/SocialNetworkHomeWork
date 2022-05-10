@@ -21,5 +21,14 @@ export let state = {
             {id: "4", name: "Aiki"}
         ]
     },
+}
 
+export let addPost = (postMessage:string) => {
+    debugger
+    let newPost = {
+        id: "5",
+        message: postMessage,
+        likeCount: 0
+    }
+    state.profilePage.posts.push(newPost)
 }
