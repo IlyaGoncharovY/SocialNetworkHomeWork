@@ -1,13 +1,15 @@
 import React from "react";
 import {renderThree} from "../render";
 
+
 export let state = {
     profilePage: {
         posts: [
             {id: "1", message: "Hello! how are you?", likeCount: 15},
             {id: "2", message: "Its my first post", likeCount: 20}
 
-        ]
+        ],
+        newPostText: "hello my friends!!!"
     },
     messagePage: {
         message: [
@@ -24,13 +26,18 @@ export let state = {
     },
 }
 
-export let addPost = (postMessage:string) => {
-    debugger
+export let addPost = () => {
     let newPost = {
         id: "5",
-        message: postMessage,
+        message: state.profilePage.newPostText,
         likeCount: 0
     }
     state.profilePage.posts.push(newPost)
+    state.profilePage.newPostText = ("")
+    renderThree(state)
+}
+
+export let updateNewPostText = (newText: string) => {
+    state.profilePage.newPostText = newText
     renderThree(state)
 }

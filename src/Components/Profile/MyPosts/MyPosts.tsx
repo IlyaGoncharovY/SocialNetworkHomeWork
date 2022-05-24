@@ -5,7 +5,9 @@ import s from "./MyPosts.module.css"
 type MyPostsPropsType = {
     title: string
     postDataPropsType: postDataPropsType[]
-    addPost:(postMessage: string)=>void
+    addPost: (postMessage: string) => void
+    updateNewPostText: (updateNewPostText:string)=>void
+    newPostText: string
 }
 
 type postDataPropsType = {
@@ -26,14 +28,22 @@ const MyPosts = (props: MyPostsPropsType) => {
     let postsElement = props.postDataPropsType.map(el => <Post message={el.message} likeCount={el.likeCount}
                                                                key={el.id}/>)
 
-  //  let [message, setMessage] = useState<string>()
+    //  let [message, setMessage] = useState<string>()
 
     let newPostElement = useRef<HTMLTextAreaElement>(null);
 
     let onClickHandlerAddPost = () => {
         let text = newPostElement.current;
-        if(text) {
+        if (text) {
             props.addPost(text.value)
+        }
+
+    }
+
+    let onChangeHandlerPost = () => {
+        let text = newPostElement.current;
+        if (text) {
+            props.updateNewPostText(text.value)
         }
     }
 
@@ -43,7 +53,7 @@ const MyPosts = (props: MyPostsPropsType) => {
             <div>
                 <div>
                     {/*<input ref={newPostElement}></input>*/}
-                    <textarea ref={newPostElement}/>
+                    <textarea onChange={onChangeHandlerPost} ref={newPostElement} value={props.newPostText}/>
                 </div>
                 <div>
                     <button onClick={onClickHandlerAddPost}>add post</button>

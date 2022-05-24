@@ -9,6 +9,7 @@ import {News} from "./Components/News/News";
 import {Music} from "./Components/Music/Music";
 import {Settings} from "./Components/Settings/Settings";
 import {Navbar} from "./Components/Navbar/Navbar";
+import {updateNewPostText} from "./State/State";
 
 /*// начинать с 31 урока.*/
 
@@ -19,6 +20,7 @@ import {Navbar} from "./Components/Navbar/Navbar";
 export type AppPropsType = {
     appState: statePropsType
     addPost: (postMessage: string)=>void
+    updateNewPostText:(updateNewPostText:string)=>void
 }
 
 type statePropsType = {
@@ -28,7 +30,8 @@ type statePropsType = {
 }
 
 type profilePageType = {
-    posts: postDataPropsType[]
+    posts: postDataPropsType[],
+    newPostText:string
 }
 
 type messagePageType = {
@@ -62,8 +65,12 @@ const App = (props: AppPropsType) => {
                 <Navbar/>
                 <div className={"app-wrapper-content"}>
                     <Routes>
-                        <Route path="/profile" element={<Profile profilePropsType={props.appState.profilePage.posts}
-                                                                 addPost={props.addPost}/>}/>
+                        <Route path="/profile" element={<Profile
+                            profilePropsType={props.appState.profilePage.posts}
+                            addPost={props.addPost}
+                            newPostText={props.appState.profilePage.newPostText}
+                            updateNewPostText={props.updateNewPostText}
+                        />}/>
                         <Route path="/dialogs"
                                element={<Dialogs dialogData={props.appState.messagePage.dialog}
                                                  messageData={props.appState.messagePage.message}/>}/>
