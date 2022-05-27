@@ -1,6 +1,8 @@
 import React from "react";
-import {renderThree} from "../render";
 
+let renderThree = (state:any) => {
+    console.log("hello")
+}
 
 export let state = {
     profilePage: {
@@ -26,7 +28,7 @@ export let state = {
     },
 }
 
-export let addPost = () => {
+export const addPost = () => {
     let newPost = {
         id: "5",
         message: state.profilePage.newPostText,
@@ -37,7 +39,11 @@ export let addPost = () => {
     renderThree(state)
 }
 
-export let updateNewPostText = (newText: string) => {
+export const updateNewPostText = (newText: string) => {
     state.profilePage.newPostText = newText
     renderThree(state)
+}
+
+export const subscribe = (observer: (state:any) => void) => {
+    renderThree = observer
 }
