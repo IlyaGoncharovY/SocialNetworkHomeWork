@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './App.css';
 import Header from "./Components/Header/Header";
 
@@ -9,13 +9,6 @@ import {News} from "./Components/News/News";
 import {Music} from "./Components/Music/Music";
 import {Settings} from "./Components/Settings/Settings";
 import {Navbar} from "./Components/Navbar/Navbar";
-import {updateNewPostText} from "./State/State";
-
-/*// начинать с 31 урока.*/
-
-// type profilePropsType = {
-//   state:statePropsType[]
-// }
 
 export type AppPropsType = {
     appState: statePropsType

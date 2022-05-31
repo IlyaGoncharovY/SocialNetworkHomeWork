@@ -1,7 +1,7 @@
 import React from 'react';
 import MyPosts from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {addPost, updateNewPostText} from "../../State/State";
+import {store} from "../../State/State";
 
 type profilePropsType = {
     id: string
@@ -23,7 +23,7 @@ const Profile = (props: postDataPropsType) => {
             <MyPosts title={"My posts"}
                      postDataPropsType={props.profilePropsType}
                      newPostText={props.newPostText}
-                     addPost={addPost}
+                     addPost={store.addPost}
                      updateNewPostText={props.updateNewPostText}
             />
         </div>
