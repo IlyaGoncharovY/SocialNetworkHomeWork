@@ -10,8 +10,9 @@ import {store} from "./State/State";
 let renderThree = (state: any) => {
     ReactDOM.render(
         <React.StrictMode>
-            <App appState={state} addPost={store.addPost.bind(store)}
-                 updateNewPostText={store.updateNewPostText.bind(store)}/>
+            <App appState={state}
+                 dispatch={store.dispatch.bind(store)}
+            />
         </React.StrictMode>,
         document.getElementById('root')
     );

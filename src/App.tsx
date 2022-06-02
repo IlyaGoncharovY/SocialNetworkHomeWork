@@ -60,9 +60,8 @@ const App = (props: AppPropsType) => {
                     <Routes>
                         <Route path="/profile" element={<Profile
                             profilePropsType={props.appState.profilePage.posts}
-                            addPost={props.addPost}
+                            dispatch={props.dispatch}
                             newPostText={props.appState.profilePage.newPostText}
-                            updateNewPostText={props.updateNewPostText}
                         />}/>
                         <Route path="/dialogs"
                                element={<Dialogs dialogData={props.appState.messagePage.dialog}

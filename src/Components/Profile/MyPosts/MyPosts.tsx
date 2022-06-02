@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {ChangeEvent, useRef} from 'react';
 import Post from "./Post/Post";
 import s from "./MyPosts.module.css"
 
@@ -6,7 +6,7 @@ type MyPostsPropsType = {
     title: string
     postDataPropsType: postDataPropsType[]
     addPost: (postMessage: string) => void
-    updateNewPostText: (updateNewPostText:string)=>void
+    updateNewPostText: (updateNewPostText: string) => void
     newPostText: string
 }
 
@@ -24,27 +24,29 @@ type postDataPropsType = {
 
 
 const MyPosts = (props: MyPostsPropsType) => {
-
     let postsElement = props.postDataPropsType.map(el => <Post message={el.message} likeCount={el.likeCount}
                                                                key={el.id}/>)
 
     //  let [message, setMessage] = useState<string>()
 
-    let newPostElement = useRef<HTMLTextAreaElement>(null);
+    //let newPostElement = useRef<HTMLTextAreaElement>(null);
 
     let onClickHandlerAddPost = () => {
-        let text = newPostElement.current;
-        if (text) {
-            props.addPost(text.value)
-        }
+        // let text = newPostElement.current;
+        //if (text) {
+       // props.addPost(props.newPostText)
+        //}
+        props.dispatch({type: "ADD-POST"})
 
     }
 
-    let onChangeHandlerPost = () => {
-        let text = newPostElement.current;
-        if (text) {
-            props.updateNewPostText(text.value)
-        }
+    let onChangeHandlerPost = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        //let text = newPostElement.current;
+        //if (text) {
+       // props.updateNewPostText(e.currentTarget.value)
+        //}
+        let action = { type: "UPDATE-NEW-POST-TEXT", newText: newText}
+        props.dispatch(action)
     }
 
     return (
@@ -53,7 +55,7 @@ const MyPosts = (props: MyPostsPropsType) => {
             <div>
                 <div>
                     {/*<input ref={newPostElement}></input>*/}
-                    <textarea onChange={onChangeHandlerPost} ref={newPostElement} value={props.newPostText}/>
+                    <textarea onChange={onChangeHandlerPost} value={props.newPostText}/>
                 </div>
                 <div>
                     <button onClick={onClickHandlerAddPost}>add post</button>

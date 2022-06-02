@@ -23,8 +23,9 @@ const Profile = (props: postDataPropsType) => {
             <MyPosts title={"My posts"}
                      postDataPropsType={props.profilePropsType}
                      newPostText={props.newPostText}
-                     addPost={store.addPost}
-                     updateNewPostText={props.updateNewPostText}
+                     // addPost={store.addPost.bind(store)}
+                     //addPost={props.addPost}
+                     dispatch={props.dispatch}
             />
         </div>
     );
