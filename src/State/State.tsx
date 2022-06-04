@@ -5,6 +5,7 @@ import React from "react";
 // }
 
 export type StoreType = {
+
     _state: StateType,
     // updateNewPostText: (newText: string) => void
     // addPost: (postText: string) => void

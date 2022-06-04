@@ -2,15 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {StateType, store} from "./State/State";
+import {store} from "./State/State";
 
 
 
 
-let renderThree = (state: StateType) => {
+let renderThree = () => {
     ReactDOM.render(
         <React.StrictMode>
-            <App appState={state}
+            <App appState={store.getState()}
+                 store={store}
                  dispatch={store.dispatch.bind(store)}
             />
         </React.StrictMode>,
@@ -18,7 +19,7 @@ let renderThree = (state: StateType) => {
     );
 }
 
-renderThree(store.getState())
+renderThree()
 store.subscribe(renderThree)
 
 
