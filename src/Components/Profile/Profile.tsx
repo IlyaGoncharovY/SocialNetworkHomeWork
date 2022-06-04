@@ -11,9 +11,8 @@ type profilePropsType = {
 
 type postDataPropsType = {
     profilePropsType: profilePropsType[]
-    updateNewPostText: (updateNewPostText: string) => void
-    newPostText: string
-    newText:string
+     newPostText: string
+    // newText:string
     dispatch: (action: ActionType) => void
 }
 
@@ -25,7 +24,8 @@ const Profile = (props: postDataPropsType) => {
                      postDataPropsType={props.profilePropsType}
                      newPostText={props.newPostText}
                      dispatch={props.dispatch}
-                     newText={props.newText}/>
+                    // newText={props.newText}
+            />
         </div>
     );
 };

@@ -91,6 +91,7 @@ export const store: StoreType = {
     subscribe(observer) {
         this._callSubscriber = observer
     },
+
     dispatch(action: ActionType) {
         if (action.type === "ADD-POST") {
             let newPost: postsType = {

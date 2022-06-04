@@ -6,7 +6,6 @@ import {ActionType} from "../../../State/State";
 type MyPostsPropsType = {
     title: string
     postDataPropsType: postDataPropsType[]
-    newText:string
     newPostText: string
     dispatch: (action: ActionType) => void
 }
@@ -28,7 +27,7 @@ const MyPosts = (props: MyPostsPropsType) => {
     }
 
     let onChangeHandlerPost = (e: ChangeEvent<HTMLTextAreaElement>) => {
-     props.dispatch({type: "UPDATE-NEW-POST-TEXT", newText: props.newText})
+     props.dispatch({type: "UPDATE-NEW-POST-TEXT", newText: e.currentTarget.value})
     }
 
     return (
