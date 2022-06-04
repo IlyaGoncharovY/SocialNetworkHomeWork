@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {store} from "./State/State";
+import {StateType, store} from "./State/State";
 
 
 
 
-let renderThree = (state: any) => {
+let renderThree = (state: StateType) => {
     ReactDOM.render(
         <React.StrictMode>
             <App appState={state}

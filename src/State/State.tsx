@@ -4,7 +4,60 @@ import React from "react";
 //     profilePage: profilePage
 // }
 
-export const store = {
+export type StoreType = {
+    _state: StateType,
+    // updateNewPostText: (newText: string) => void
+    // addPost: (postText: string) => void
+    _callSubscriber: () => void
+    subscribe: (observer: () => void) => void
+    getState: () => StateType
+    dispatch: (action: ActionType) => void
+}
+
+export type StateType = {
+    profilePage: profilePageType
+    messagePage: messagePageType
+}
+
+type profilePageType = {
+    posts: postsType[]
+    newPostText: string
+}
+
+export type postsType = {
+    id: string
+    message: string
+    likeCount: number
+}
+
+type messagePageType = {
+    message: messageType[]
+    dialog: dialogType[]
+}
+
+type messageType = {
+    id: string
+    message: string
+}
+
+type dialogType = {
+    id: string
+    name: string
+}
+
+type AddPostActionType = {
+    type: "ADD-POST",
+    postText: string
+}
+
+type ChangeNewTextActionType = {
+    type: "UPDATE-NEW-POST-TEXT",
+    newText: string
+}
+
+export type ActionType = AddPostActionType | ChangeNewTextActionType
+
+export const store: StoreType = {
     _state: {
         profilePage: {
             posts: [
@@ -28,44 +81,29 @@ export const store = {
             ]
         },
     },
-    _callSubscriber(state: any) {
+    _callSubscriber() {
         console.log("hello")
     },
 
     getState() {
         return this._state
     },
-    subscribe(observer: (state: any) => void) {
+    subscribe(observer) {
         this._callSubscriber = observer
     },
-    
-    // addPost() {
-    //     let newPost = {
-    //         id: "5",
-    //         message: this._state.profilePage.newPostText,
-    //         likeCount: 0
-    //     }
-    //     this._state.profilePage.posts.push(newPost)
-    //     this._state.profilePage.newPostText = ("")
-    //     this._callSubscriber(this._state)
-    // },
-    // updateNewPostText(newText: string) {
-    //     this._state.profilePage.newPostText = newText
-    //     this._callSubscriber(this._state)
-    // },
-    dispatch(action: any) {
+    dispatch(action: ActionType) {
         if (action.type === "ADD-POST") {
-            let newPost = {
+            let newPost: postsType = {
                 id: "5",
-                message: this._state.profilePage.newPostText,
+                message: action.postText,
                 likeCount: 0
             }
             this._state.profilePage.posts.push(newPost)
             this._state.profilePage.newPostText = ("")
-            this._callSubscriber(this._state)
+            this._callSubscriber()
         } else if (action.type === "UPDATE-NEW-POST-TEXT") {
             this._state.profilePage.newPostText = action.newText
-            this._callSubscriber(this._state)
+            this._callSubscriber()
         }
     }
 }
