@@ -46,17 +46,33 @@ type dialogType = {
     name: string
 }
 
-type AddPostActionType = {
-    type: "ADD-POST",
-    postText: string
-}
+// export type AddPostActionType = {
+//     type: "ADD-POST",
+//     postText: string
+// }
+export type AddPostActionType = ReturnType<typeof addPostAC>
 
-type ChangeNewTextActionType = {
-    type: "UPDATE-NEW-POST-TEXT",
-    newText: string
-}
+// export type ChangeNewTextActionType = {
+//     type: "UPDATE-NEW-POST-TEXT",
+//     newText: string
+// }
+export type ChangeNewTextActionType = ReturnType<typeof changeNewTextAC>
 
 export type ActionType = AddPostActionType | ChangeNewTextActionType
+
+export const addPostAC = (postText: string) => {
+    return {
+        type: "ADD-POST",
+        postText
+    } as const
+}
+
+export const changeNewTextAC = ( newText: string) => {
+    return {
+        type: "UPDATE-NEW-POST-TEXT",
+        newText
+    } as const
+}
 
 export const store: StoreType = {
     _state: {

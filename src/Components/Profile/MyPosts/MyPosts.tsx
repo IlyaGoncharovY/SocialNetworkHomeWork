@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useRef} from 'react';
 import Post from "./Post/Post";
 import s from "./MyPosts.module.css"
-import {ActionType} from "../../../State/State";
+import {ActionType, addPostAC, changeNewTextAC} from "../../../State/State";
 
 type MyPostsPropsType = {
     title: string
@@ -16,18 +16,19 @@ type postDataPropsType = {
     likeCount: number
 }
 
-
 const MyPosts = (props: MyPostsPropsType) => {
     let postsElement = props.postDataPropsType.map(el => <Post message={el.message} likeCount={el.likeCount}
                                                                key={el.id}/>)
 
     let onClickHandlerAddPost = () => {
-        props.dispatch({type: "ADD-POST", postText: props.newPostText})
+        // props.dispatch({type: "ADD-POST", postText: props.newPostText})
+        props.dispatch(addPostAC(props.newPostText))
 
     }
 
     let onChangeHandlerPost = (e: ChangeEvent<HTMLTextAreaElement>) => {
-     props.dispatch({type: "UPDATE-NEW-POST-TEXT", newText: e.currentTarget.value})
+    //props.dispatch({type: "UPDATE-NEW-POST-TEXT", newText: e.currentTarget.value})
+        props.dispatch(changeNewTextAC(e.currentTarget.value))
     }
 
     return (
