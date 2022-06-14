@@ -69,6 +69,8 @@ const App = (props: AppPropsType) => {
                         <Route path="/dialogs"
                                element={<Dialogs dialogData={props.appState.messagePage.dialog}
                                                  messageData={props.appState.messagePage.message}
+                                                 newMessageBody={props.appState.messagePage.newMessageBody}
+                                                 store={props.store}
                                />}/>
                         <Route path="/news" element={<News/>}/>
                         <Route path="/music" element={<Music/>}/>

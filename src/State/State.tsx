@@ -34,6 +34,7 @@ export type postsType = {
 type messagePageType = {
     message: messageType[]
     dialog: dialogType[]
+    newMessageBody:string
 }
 
 type messageType = {
@@ -45,6 +46,7 @@ type dialogType = {
     id: string
     name: string
 }
+
 
 // export type AddPostActionType = {
 //     type: "ADD-POST",
@@ -58,7 +60,11 @@ export type AddPostActionType = ReturnType<typeof addPostAC>
 // }
 export type ChangeNewTextActionType = ReturnType<typeof changeNewTextAC>
 
-export type ActionType = AddPostActionType | ChangeNewTextActionType
+export type NewMessageBodyActionType = ReturnType<typeof updateNewMessageBodyAC>
+
+export type SendMessageActionType = ReturnType<typeof sendMessageAC>
+
+export type ActionType = AddPostActionType | ChangeNewTextActionType | NewMessageBodyActionType | SendMessageActionType
 
 export const addPostAC = (postText: string) => {
     return {
@@ -71,6 +77,19 @@ export const changeNewTextAC = ( newText: string) => {
     return {
         type: "UPDATE-NEW-POST-TEXT",
         newText
+    } as const
+}
+
+export const updateNewMessageBodyAC = (newMessageBody: string) => {
+    return {
+        type: "UPDATE-NEW-MESSAGE-BODY",
+        newMessageBody
+    } as const
+}
+
+export const sendMessageAC = () => {
+    return {
+        type: "SEND-MESSAGE"
     } as const
 }
 
@@ -95,7 +114,8 @@ export const store: StoreType = {
                 {id: "2", name: "Nastya"},
                 {id: "3", name: "Varya"},
                 {id: "4", name: "Aiki"}
-            ]
+            ],
+            newMessageBody: ""
         },
     },
     _callSubscriber() {
@@ -121,6 +141,14 @@ export const store: StoreType = {
             this._callSubscriber()
         } else if (action.type === "UPDATE-NEW-POST-TEXT") {
             this._state.profilePage.newPostText = action.newText
+            this._callSubscriber()
+        } else if (action.type === "UPDATE-NEW-MESSAGE-BODY") {
+            this._state.messagePage.newMessageBody = action.newMessageBody
+            this._callSubscriber()
+        } else if (action.type === "SEND-MESSAGE") {
+            let body = this._state.messagePage.newMessageBody
+            this._state.messagePage.newMessageBody = ""
+            this._state.messagePage.message.push({id: "6", message: body})
             this._callSubscriber()
         }
     }
