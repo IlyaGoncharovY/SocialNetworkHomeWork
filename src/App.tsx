@@ -9,7 +9,9 @@ import {News} from "./Components/News/News";
 import {Music} from "./Components/Music/Music";
 import {Settings} from "./Components/Settings/Settings";
 import {Navbar} from "./Components/Navbar/Navbar";
-import {ActionType, StateType, StoreType} from "./State/State";
+import {StateType, StoreType} from "./redux/State";
+import {ActionType} from "./redux/profile-reducer";
+
 
 export type AppPropsType = {
     appState: StateType

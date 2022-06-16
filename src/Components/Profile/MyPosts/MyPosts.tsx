@@ -1,7 +1,8 @@
 import React, {ChangeEvent, useRef} from 'react';
 import Post from "./Post/Post";
 import s from "./MyPosts.module.css"
-import {ActionType, addPostAC, changeNewTextAC} from "../../../State/State";
+import {ActionType, addPostAC, changeNewTextAC} from "../../../redux/profile-reducer";
+
 
 type MyPostsPropsType = {
     title: string
