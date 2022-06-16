@@ -3,15 +3,20 @@ import {postsType, profilePageType, reducerAllType} from "./State";
 
 export type AddPostActionType = ReturnType<typeof addPostAC>
 
-// export type ChangeNewTextActionType = {
-//     type: "UPDATE-NEW-POST-TEXT",
-//     newText: string
-// }
 export type ChangeNewTextActionType = ReturnType<typeof changeNewTextAC>
 
-export type profileActionType = AddPostActionType | ChangeNewTextActionType
+type initialStateType = typeof initialState
 
-export const profileReducer = (state: profilePageType, action: reducerAllType):profilePageType => {
+let initialState = {
+    posts: [
+        {id: "1", message: "Hello! how are you?", likeCount: 15},
+        {id: "2", message: "Its my first post", likeCount: 20}
+
+    ],
+    newPostText: "hello my friends!!!"
+}
+
+export const profileReducer = (state: initialStateType = initialState, action: reducerAllType):profilePageType => {
 
     switch (action.type) {
         case "ADD-POST":

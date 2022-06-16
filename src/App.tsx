@@ -9,47 +9,14 @@ import {News} from "./Components/News/News";
 import {Music} from "./Components/Music/Music";
 import {Settings} from "./Components/Settings/Settings";
 import {Navbar} from "./Components/Navbar/Navbar";
-import {StateType, StoreType} from "./redux/State";
-import {ActionType} from "./redux/profile-reducer";
+import {reducerAllType, StateType, StoreType} from "./redux/State";
 
 
 export type AppPropsType = {
     appState: StateType
     store: StoreType
-    dispatch: (action: ActionType)=>void
+    dispatch: (action: reducerAllType)=>void
 }
-
-// type statePropsType = {
-//     profilePage: profilePageType
-//     messagePage: messagePageType
-//
-// }
-//
-// type profilePageType = {
-//     posts: postDataPropsType[],
-//     newPostText:string
-// }
-//
-// type messagePageType = {
-//     message: messagePropsType[]
-//     dialog: dialogsPropsType[]
-// }
-//
-// type postDataPropsType = {
-//     id: string
-//     message: string
-//     likeCount: number
-// }
-//
-// type dialogsPropsType = {
-//     id: string
-//     name: string
-// }
-//
-// type messagePropsType = {
-//     id: string
-//     message: string
-// }
 
 
 const App = (props: AppPropsType) => {

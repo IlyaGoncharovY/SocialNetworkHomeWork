@@ -1,14 +1,15 @@
 import React, {ChangeEvent, useRef} from 'react';
 import Post from "./Post/Post";
 import s from "./MyPosts.module.css"
-import {ActionType, addPostAC, changeNewTextAC} from "../../../redux/profile-reducer";
+import {addPostAC, changeNewTextAC} from "../../../redux/profile-reducer";
+import {reducerAllType} from "../../../redux/State";
 
 
 type MyPostsPropsType = {
     title: string
     postDataPropsType: postDataPropsType[]
     newPostText: string
-    dispatch: (action: ActionType) => void
+    dispatch: (action: reducerAllType) => void
 }
 
 type postDataPropsType = {
@@ -22,13 +23,11 @@ const MyPosts = (props: MyPostsPropsType) => {
                                                                key={el.id}/>)
 
     let onClickHandlerAddPost = () => {
-        // props.dispatch({type: "ADD-POST", postText: props.newPostText})
         props.dispatch(addPostAC(props.newPostText))
 
     }
 
     let onChangeHandlerPost = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    //props.dispatch({type: "UPDATE-NEW-POST-TEXT", newText: e.currentTarget.value})
         props.dispatch(changeNewTextAC(e.currentTarget.value))
     }
 

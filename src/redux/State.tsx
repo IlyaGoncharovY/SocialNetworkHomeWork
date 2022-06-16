@@ -1,16 +1,10 @@
 import React from "react";
-import {AddPostActionType, ChangeNewTextActionType, profileActionType, profileReducer} from "./profile-reducer";
-import {messageActionType, messageReducer, NewMessageBodyActionType, SendMessageActionType} from "./message-reducer";
+import {AddPostActionType, ChangeNewTextActionType, profileReducer} from "./profile-reducer";
+import {messageReducer, NewMessageBodyActionType, SendMessageActionType} from "./message-reducer";
 
-// export type storeType = {
-//     profilePage: profilePage
-// }
 
 export type StoreType = {
-
     _state: StateType,
-    // updateNewPostText: (newText: string) => void
-    // addPost: (postText: string) => void
     _callSubscriber: () => void
     subscribe: (observer: () => void) => void
     getState: () => StateType
@@ -49,52 +43,10 @@ type dialogType = {
     name: string
 }
 
-export type reducerAllType = AddPostActionType | ChangeNewTextActionType | NewMessageBodyActionType | SendMessageActionType
-
-// export type AddPostActionType = {
-//     type: "ADD-POST",
-//     postText: string
-// }
-// export type AddPostActionType = ReturnType<typeof addPostAC>
-//
-// // export type ChangeNewTextActionType = {
-// //     type: "UPDATE-NEW-POST-TEXT",
-// //     newText: string
-// // }
-// export type ChangeNewTextActionType = ReturnType<typeof changeNewTextAC>
-
-// export type NewMessageBodyActionType = ReturnType<typeof updateNewMessageBodyAC>
-//
-// export type SendMessageActionType = ReturnType<typeof sendMessageAC>
-//
-// export type ActionType =/* AddPostActionType | ChangeNewTextActionType*/ | NewMessageBodyActionType | SendMessageActionType
-
-// export const addPostAC = (postText: string) => {
-//     return {
-//         type: "ADD-POST",
-//         postText
-//     } as const
-// }
-//
-// export const changeNewTextAC = ( newText: string) => {
-//     return {
-//         type: "UPDATE-NEW-POST-TEXT",
-//         newText
-//     } as const
-// }
-
-// export const updateNewMessageBodyAC = (newMessageBody: string) => {
-//     return {
-//         type: "UPDATE-NEW-MESSAGE-BODY",
-//         newMessageBody
-//     } as const
-// }
-//
-// export const sendMessageAC = () => {
-//     return {
-//         type: "SEND-MESSAGE"
-//     } as const
-// }
+export type reducerAllType = AddPostActionType |
+    ChangeNewTextActionType |
+    NewMessageBodyActionType |
+    SendMessageActionType
 
 export const store: StoreType = {
     _state: {

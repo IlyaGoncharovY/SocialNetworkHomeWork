@@ -1,8 +1,7 @@
 import React from 'react';
 import MyPosts from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {ActionType} from "../../redux/profile-reducer";
-
+import {reducerAllType} from "../../redux/State";
 
 type profilePropsType = {
     id: string
@@ -13,8 +12,7 @@ type profilePropsType = {
 type postDataPropsType = {
     profilePropsType: profilePropsType[]
      newPostText: string
-    // newText:string
-    dispatch: (action: ActionType) => void
+    dispatch: (action: reducerAllType) => void
 }
 
 const Profile = (props: postDataPropsType) => {
@@ -25,7 +23,6 @@ const Profile = (props: postDataPropsType) => {
                      postDataPropsType={props.profilePropsType}
                      newPostText={props.newPostText}
                      dispatch={props.dispatch}
-                    // newText={props.newText}
             />
         </div>
     );

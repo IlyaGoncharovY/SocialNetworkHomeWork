@@ -5,9 +5,24 @@ export type NewMessageBodyActionType = ReturnType<typeof updateNewMessageBodyAC>
 
 export type SendMessageActionType = ReturnType<typeof sendMessageAC>
 
-export type messageActionType = NewMessageBodyActionType | SendMessageActionType
+type initialStateType = typeof initialState
 
-export const messageReducer = (state: messagePageType, action: reducerAllType):messagePageType => {
+let initialState = {
+    message: [
+        {id: "1", message: "hello"},
+        {id: "2", message: "ho ho ho"},
+        {id: "3", message: "vnature"},
+    ],
+    dialog: [
+        {id: "1", name: "Ilya"},
+        {id: "2", name: "Nastya"},
+        {id: "3", name: "Varya"},
+        {id: "4", name: "Aiki"}
+    ],
+    newMessageBody: ""
+}
+
+export const messageReducer = (state: initialStateType = initialState, action: reducerAllType):messagePageType => {
 
     switch (action.type) {
         case "UPDATE-NEW-MESSAGE-BODY":
