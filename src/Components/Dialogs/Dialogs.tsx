@@ -4,12 +4,13 @@ import {Message} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogItem";
 import {StoreType} from "../../redux/State";
 import {sendMessageAC, updateNewMessageBodyAC} from "../../redux/message-reducer";
+import {store} from "../../redux/r-store";
 
 type DialogsPropsType = {
     dialogData: dialogData[]
     messageData: messageData[]
     newMessageBody: string
-    store: StoreType
+
 }
 
 type dialogData = {
@@ -31,12 +32,12 @@ export const Dialogs = (props: DialogsPropsType) => {
     let newMessageBody = props.newMessageBody
 
     let onSendMessageClick = () => {
-        props.store.dispatch(sendMessageAC())
+        store.dispatch(sendMessageAC())
     }
 
     let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let body = e.currentTarget.value
-        props.store.dispatch(updateNewMessageBodyAC(body))
+        store.dispatch(updateNewMessageBodyAC(body))
     }
 
     return (

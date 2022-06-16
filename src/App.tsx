@@ -10,17 +10,18 @@ import {Music} from "./Components/Music/Music";
 import {Settings} from "./Components/Settings/Settings";
 import {Navbar} from "./Components/Navbar/Navbar";
 import {reducerAllType, StateType, StoreType} from "./redux/State";
+import {store} from "./redux/r-store";
 
 
 export type AppPropsType = {
-    appState: StateType
-    store: StoreType
-    dispatch: (action: reducerAllType)=>void
+    // appState: StateType
+    // store: StoreType
+    // dispatch: (action: reducerAllType)=>void
 }
 
 
 const App = (props: AppPropsType) => {
-    const state = props.store.getState()
+    const state = store.getState()
     return (
         <BrowserRouter>
             <div className={"app-wrapper"}>
@@ -29,17 +30,17 @@ const App = (props: AppPropsType) => {
                 <div className={"app-wrapper-content"}>
                     <Routes>
                         <Route path="/profile" element={<Profile
-                            profilePropsType={state.profilePage.posts}
-                            dispatch={props.store.dispatch.bind(props.store)}
-                            newPostText={state.profilePage.newPostText}
+                            profilePropsType={state.profileReducer.posts}
+                            dispatch={store.dispatch.bind(store)}
+                            newPostText={state.profileReducer.newPostText}
                          />
                         }
                         />
                         <Route path="/dialogs"
-                               element={<Dialogs dialogData={props.appState.messagePage.dialog}
-                                                 messageData={props.appState.messagePage.message}
-                                                 newMessageBody={props.appState.messagePage.newMessageBody}
-                                                 store={props.store}
+                               element={<Dialogs dialogData={state.messageReducer.dialog}
+                                                 messageData={state.messageReducer.message}
+                                                 newMessageBody={state.messageReducer.newMessageBody}
+
                                />}/>
                         <Route path="/news" element={<News/>}/>
                         <Route path="/music" element={<Music/>}/>
