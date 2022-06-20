@@ -4,8 +4,12 @@ import {messageReducer} from "./message-reducer";
 
 
 let rootReducer = combineReducers({
-    profileReducer: profileReducer,
-    messageReducer: messageReducer
+    profilePage: profileReducer,
+    messagePage: messageReducer
 })
 
-export let store = createStore(rootReducer)
+export type AppStateType = ReturnType<typeof rootReducer>
+export type AppStoreType = typeof store
+export const store = createStore(rootReducer)
+
+

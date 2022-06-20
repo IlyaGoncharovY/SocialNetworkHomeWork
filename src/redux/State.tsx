@@ -3,7 +3,7 @@ import {AddPostActionType, ChangeNewTextActionType, profileReducer} from "./prof
 import {messageReducer, NewMessageBodyActionType, SendMessageActionType} from "./message-reducer";
 
 
-export type StoreType = {
+type StoreType = {
     _state: StateType,
     _callSubscriber: () => void
     subscribe: (observer: () => void) => void
@@ -11,39 +11,39 @@ export type StoreType = {
     dispatch: (action: reducerAllType) => void
 }
 
-export type StateType = {
+type StateType = {
     profilePage: profilePageType
     messagePage: messagePageType
 }
 
-export type profilePageType = {
+type profilePageType = {
     posts: postsType[]
     newPostText: string
 }
 
-export type postsType = {
+type postsType = {
     id: string
     message: string
     likeCount: number
 }
 
-export type messagePageType = {
+type messagePageType = {
     message: messageType[]
     dialog: dialogType[]
     newMessageBody:string
 }
 
-export type messageType = {
+type messageType = {
     id: string
     message: string
 }
 
-export type dialogType = {
+type dialogType = {
     id: string
     name: string
 }
 
-export type reducerAllType = AddPostActionType |
+type reducerAllType = AddPostActionType |
     ChangeNewTextActionType |
     NewMessageBodyActionType |
     SendMessageActionType
@@ -86,7 +86,9 @@ export const store: StoreType = {
 
     dispatch(action: reducerAllType) {
 
+        // @ts-ignore
         this._state.profilePage = profileReducer(this._state.profilePage, action)
+        // @ts-ignore
         this._state.messagePage = messageReducer(this._state.messagePage, action)
 
         this._callSubscriber()

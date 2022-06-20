@@ -1,51 +1,93 @@
 import React, {ChangeEvent, useRef} from 'react';
 import Post from "./Post/Post";
 import s from "./MyPosts.module.css"
-import {addPostAC, changeNewTextAC} from "../../../redux/profile-reducer";
-import {reducerAllType, StoreType} from "../../../redux/State";
+import {addPostAC, changeNewTextAC, initialStateType} from "../../../redux/profile-reducer";
+// import {reducerAllType, StateType, StoreType} from "../../../redux/State";
 import MyPosts from "./MyPosts";
-import {store} from "../../../redux/r-store";
+import {AppStateType/*, store*/} from "../../../redux/r-store";
+import {connect} from "react-redux";
+import {Dispatch} from "redux";
 
 
+//
+// type MyPostsPropsType = {
+//     title: string
+//     postDataPropsType: postDataPropsType[]
+//     newPostText: string
+//     dispatch: (action: reducerAllType) => void
+//     store: StoreType
+// }
+//
+// type postDataPropsType = {
+//     id: string
+//     message: string
+//     likeCount: number
+// }
+//
+// export const MyPostsContainer = (props: MyPostsPropsType) => {
+//
+//     // let postsElement = props.postDataPropsType.map(el => <Post message={el.message} likeCount={el.likeCount}
+//     //                                                            key={el.id}/>)
+//
+//     let onClickHandlerAddPost = () => {
+//         props.dispatch(addPostAC(props.newPostText))
+//
+//     }
+//
+//     let onChangeHandlerPost = (text: string) => {
+//       /*  let text = e.currentTarget.value*/
+//         let action = changeNewTextAC(text)
+//         store.dispatch(action)
+//     }
+//
+//     return (
+//        <MyPosts
+//            updateNewPostText={onChangeHandlerPost}
+//            addPost={onClickHandlerAddPost}
+//            title={props.title}
+//            posts={props.store._state.profilePage.posts}
+//            newPostText={props.store._state.profilePage.newPostText}
+//        />
+//     );
+// };
 
-type MyPostsPropsType = {
+type mapStateToPropsType = {
+    posts: initialStateType
+    newPostText: initialStateType
     title: string
-    postDataPropsType: postDataPropsType[]
-    newPostText: string
-    dispatch: (action: reducerAllType) => void
-    store: StoreType
 }
 
-type postDataPropsType = {
-    id: string
-    message: string
-    likeCount: number
+type mapDispatchToPropsType = {
+    addPost: (postText: string) => void
+    updateNewPostText: (text: any) => void
 }
 
-export const MyPostsContainer = (props: MyPostsPropsType) => {
+export type containerPostType = mapStateToPropsType & mapDispatchToPropsType
 
-    // let postsElement = props.postDataPropsType.map(el => <Post message={el.message} likeCount={el.likeCount}
-    //                                                            key={el.id}/>)
 
-    let onClickHandlerAddPost = () => {
-        props.dispatch(addPostAC(props.newPostText))
-
+let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
+    return {
+        // posts: state.profilePage.posts,
+        // newPostText: state.profilePage.newPostText,
+        // title: ""
+        posts:state.profilePage,
+        newPostText:state.profilePage,
+        title: "My posts"
     }
-
-    let onChangeHandlerPost = (text: string) => {
-      /*  let text = e.currentTarget.value*/
-        let action = changeNewTextAC(text)
-        store.dispatch(action)
+}
+let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
+    return {
+        addPost: (postText: string) => {
+            // dispatch(addPostAC(props.newPostText))
+            dispatch(addPostAC(postText))
+        },
+        updateNewPostText: (text: string) => {
+            /*  let text = e.currentTarget.value*/
+            let action = changeNewTextAC(text)
+            dispatch(action)
+        }
     }
+}
 
-    return (
-       <MyPosts
-           updateNewPostText={onChangeHandlerPost}
-           addPost={onClickHandlerAddPost}
-           title={props.title}
-           posts={props.store._state.profilePage.posts}
-           newPostText={props.store._state.profilePage.newPostText}
-       />
-    );
-};
 
+export const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts);

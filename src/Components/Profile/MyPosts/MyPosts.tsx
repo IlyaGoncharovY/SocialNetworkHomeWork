@@ -2,19 +2,20 @@ import React, {ChangeEvent, useRef} from 'react';
 import Post from "./Post/Post";
 import s from "./MyPosts.module.css"
 import {addPostAC, changeNewTextAC} from "../../../redux/profile-reducer";
-import {postsType, reducerAllType} from "../../../redux/State";
+// import {postsType, reducerAllType} from "../../../redux/State";
+import {containerPostType} from "./MyPostsContainer";
 
 
-type MyPostsPropsType = {
-    title: string
-  //  postDataPropsType: postDataPropsType[]
-    updateNewPostText: (text: string) => void
-    addPost: () => void
-    posts: postsType[]
-    newPostText: string
-    // newPostText: string
-    // dispatch: (action: reducerAllType) => void
-}
+// type MyPostsPropsType = {
+//     // title: string
+//   //  postDataPropsType: postDataPropsType[]
+//   //   updateNewPostText: (text: string) => void
+//   //   addPost: () => void
+//   //   posts: postsType[]
+//   //   newPostText: string
+//     // newPostText: string
+//     // dispatch: (action: reducerAllType) => void
+// }
 
 // type postDataPropsType = {
 //     id: string
@@ -22,13 +23,13 @@ type MyPostsPropsType = {
 //     likeCount: number
 // }
 
-const MyPosts = (props: MyPostsPropsType) => {
-    let postsElement = props.posts.map(el => <Post message={el.message} likeCount={el.likeCount}
+const MyPosts = (props: containerPostType) => {
+    let postsElement = props.posts.posts.map(el => <Post message={el.message} likeCount={el.likeCount}
                                                    key={el.id}/>)
 
-    let onClickHandlerAddPost = () => {
+    let onClickHandlerAddPost = (postText: any) => {
         // props.dispatch(addPostAC(props.newPostText))
-        props.addPost()
+        props.addPost(postText)
     }
 
     let onChangeHandlerPost = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -42,7 +43,7 @@ const MyPosts = (props: MyPostsPropsType) => {
             <h3>{props.title}</h3>
             <div>
                 <div>
-                    <textarea onChange={onChangeHandlerPost} value={props.newPostText}/>
+                    <textarea onChange={onChangeHandlerPost} value={""}/>
                 </div>
                 <div>
                     <button onClick={onClickHandlerAddPost}>add post</button>
