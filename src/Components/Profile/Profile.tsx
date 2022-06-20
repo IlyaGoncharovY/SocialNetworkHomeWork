@@ -1,7 +1,7 @@
 import React from 'react';
-import MyPosts from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {reducerAllType} from "../../redux/State";
+import {reducerAllType, StoreType} from "../../redux/State";
+import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 
 type profilePropsType = {
     id: string
@@ -10,8 +10,9 @@ type profilePropsType = {
 }
 
 type postDataPropsType = {
+    store: StoreType
     profilePropsType: profilePropsType[]
-     newPostText: string
+    newPostText: string
     dispatch: (action: reducerAllType) => void
 }
 
@@ -19,10 +20,11 @@ const Profile = (props: postDataPropsType) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts title={"My posts"}
-                     postDataPropsType={props.profilePropsType}
-                     newPostText={props.newPostText}
-                     dispatch={props.dispatch}
+            <MyPostsContainer title={"My posts"}
+                              store={props.store}
+                              postDataPropsType={props.profilePropsType}
+                              newPostText={props.newPostText}
+                              dispatch={props.dispatch}
             />
         </div>
     );

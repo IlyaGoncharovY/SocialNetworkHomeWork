@@ -33,12 +33,12 @@ export type messagePageType = {
     newMessageBody:string
 }
 
-type messageType = {
+export type messageType = {
     id: string
     message: string
 }
 
-type dialogType = {
+export type dialogType = {
     id: string
     name: string
 }

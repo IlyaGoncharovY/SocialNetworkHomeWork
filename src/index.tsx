@@ -2,22 +2,27 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {store} from "./redux/r-store";
+import {StateType, store} from "./redux/State";
 
-let renderThree = () => {
+
+let renderThree = (state: StateType) => {
     ReactDOM.render(
         <React.StrictMode>
             <App
                 // appState={store.getState()}
-                //  store={store}
-                //  dispatch={store.dispatch.bind(store)}
+                state={state}
+                store={store}
+                dispatch={store.dispatch.bind(store)}
             />
         </React.StrictMode>,
         document.getElementById('root')
     );
 }
 
-renderThree()
-store.subscribe(renderThree)
+renderThree(store.getState())
+store.subscribe(() => {
+    let state = store.getState()
+    renderThree(state)
+})
 
 
