@@ -1,6 +1,3 @@
-// import {/*messagePageType,*/ reducerAllType} from "./State";
-
-
 export type NewMessageBodyActionType = ReturnType<typeof updateNewMessageBodyAC>
 
 export type SendMessageActionType = ReturnType<typeof sendMessageAC>
@@ -35,19 +32,21 @@ let initialState = {
     newMessageBody: ""
 }
 
-export const messageReducer = (state: initialStateType = initialState, action: messageReducerActionType): initialStateType => {
-
-    let stateCopy = {...state, message: [...state.message]}
+export const dialogsReducer = (state: initialStateType = initialState, action: messageReducerActionType): initialStateType => {
 
     switch (action.type) {
         case "UPDATE-NEW-MESSAGE-BODY":
-            state.newMessageBody = action.newMessageBody
-            return state
+            return  {
+                ...state,
+                newMessageBody: action.newMessageBody
+            }
         case "SEND-MESSAGE":
             let body = state.newMessageBody
-            state.newMessageBody = ""
-            state.message.push({id: "6", message: body})
-            return state
+            return  {
+                ...state,
+                newMessageBody: "",
+                message: [...state.message, {id: "6", message: body}]
+            }
         default:
             return state
     }

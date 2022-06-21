@@ -1,6 +1,6 @@
 import React from "react";
 import {AddPostActionType, ChangeNewTextActionType, profileReducer} from "./profile-reducer";
-import {messageReducer, NewMessageBodyActionType, SendMessageActionType} from "./message-reducer";
+import {dialogsReducer, NewMessageBodyActionType, SendMessageActionType} from "./dialogs-reducer";
 
 
 type StoreType = {
@@ -89,7 +89,7 @@ export const store: StoreType = {
         // @ts-ignore
         this._state.profilePage = profileReducer(this._state.profilePage, action)
         // @ts-ignore
-        this._state.messagePage = messageReducer(this._state.messagePage, action)
+        this._state.messagePage = dialogsReducer(this._state.messagePage, action)
 
         this._callSubscriber()
     }

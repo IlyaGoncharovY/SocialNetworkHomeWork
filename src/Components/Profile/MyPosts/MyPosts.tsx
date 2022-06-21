@@ -1,28 +1,8 @@
-import React, {ChangeEvent, useRef, useState} from 'react';
+import React, {ChangeEvent} from 'react';
 import Post from "./Post/Post";
 import s from "./MyPosts.module.css"
-import {addPostAC, changeNewTextAC} from "../../../redux/profile-reducer";
-// import {postsType, reducerAllType} from "../../../redux/State";
 import {containerPostType} from "./MyPostsContainer";
-import {text} from "stream/consumers";
 
-
-// type MyPostsPropsType = {
-//     // title: string
-//   //  postDataPropsType: postDataPropsType[]
-//   //   updateNewPostText: (text: string) => void
-//   //   addPost: () => void
-//   //   posts: postsType[]
-//   //   newPostText: string
-//     // newPostText: string
-//     // dispatch: (action: reducerAllType) => void
-// }
-
-// type postDataPropsType = {
-//     id: string
-//     message: string
-//     likeCount: number
-// }
 
 const MyPosts = (props: containerPostType) => {
     debugger
@@ -31,12 +11,10 @@ const MyPosts = (props: containerPostType) => {
 
 
     let onClickHandlerAddPost = () => {
-        // props.dispatch(addPostAC(props.newPostText))
         props.addPost(props.newPostText)
     }
 
     let onChangeHandlerPost = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        // props.dispatch(changeNewTextAC(e.currentTarget.value))
         let text = e.currentTarget.value
         props.updateNewPostText(text)
     }
