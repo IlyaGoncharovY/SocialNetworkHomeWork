@@ -35,7 +35,9 @@ let initialState = {
     newMessageBody: ""
 }
 
-export const messageReducer = (state: initialStateType = initialState, action: messageReducerActionType):initialStateType => {
+export const messageReducer = (state: initialStateType = initialState, action: messageReducerActionType): initialStateType => {
+
+    let stateCopy = {...state, message: [...state.message]}
 
     switch (action.type) {
         case "UPDATE-NEW-MESSAGE-BODY":

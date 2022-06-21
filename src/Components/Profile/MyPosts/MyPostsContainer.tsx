@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useRef} from 'react';
 import Post from "./Post/Post";
 import s from "./MyPosts.module.css"
-import {addPostAC, changeNewTextAC, initialStateType} from "../../../redux/profile-reducer";
+import {addPostAC, changeNewTextAC, initialStateType, postsType} from "../../../redux/profile-reducer";
 // import {reducerAllType, StateType, StoreType} from "../../../redux/State";
 import MyPosts from "./MyPosts";
 import {AppStateType/*, store*/} from "../../../redux/r-store";
@@ -52,14 +52,14 @@ import {Dispatch} from "redux";
 // };
 
 type mapStateToPropsType = {
-    posts: initialStateType
-    newPostText: initialStateType
+    posts: postsType[]
+    newPostText: string
     title: string
 }
 
 type mapDispatchToPropsType = {
     addPost: (postText: string) => void
-    updateNewPostText: (text: any) => void
+    updateNewPostText: (text: string) => void
 }
 
 export type containerPostType = mapStateToPropsType & mapDispatchToPropsType
@@ -70,8 +70,8 @@ let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
         // posts: state.profilePage.posts,
         // newPostText: state.profilePage.newPostText,
         // title: ""
-        posts:state.profilePage,
-        newPostText:state.profilePage,
+        posts:state.profilePage.posts,
+        newPostText:state.profilePage.newPostText,
         title: "My posts"
     }
 }

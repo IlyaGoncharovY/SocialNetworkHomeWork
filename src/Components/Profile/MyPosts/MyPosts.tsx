@@ -1,9 +1,10 @@
-import React, {ChangeEvent, useRef} from 'react';
+import React, {ChangeEvent, useRef, useState} from 'react';
 import Post from "./Post/Post";
 import s from "./MyPosts.module.css"
 import {addPostAC, changeNewTextAC} from "../../../redux/profile-reducer";
 // import {postsType, reducerAllType} from "../../../redux/State";
 import {containerPostType} from "./MyPostsContainer";
+import {text} from "stream/consumers";
 
 
 // type MyPostsPropsType = {
@@ -24,12 +25,14 @@ import {containerPostType} from "./MyPostsContainer";
 // }
 
 const MyPosts = (props: containerPostType) => {
-    let postsElement = props.posts.posts.map(el => <Post message={el.message} likeCount={el.likeCount}
+    debugger
+    let postsElement = props.posts.map(el => <Post message={el.message} likeCount={el.likeCount}
                                                    key={el.id}/>)
 
-    let onClickHandlerAddPost = (postText: any) => {
+
+    let onClickHandlerAddPost = () => {
         // props.dispatch(addPostAC(props.newPostText))
-        props.addPost(postText)
+        props.addPost(props.newPostText)
     }
 
     let onChangeHandlerPost = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -43,7 +46,7 @@ const MyPosts = (props: containerPostType) => {
             <h3>{props.title}</h3>
             <div>
                 <div>
-                    <textarea onChange={onChangeHandlerPost} value={""}/>
+                    <textarea onChange={onChangeHandlerPost} value={props.newPostText}/>
                 </div>
                 <div>
                     <button onClick={onClickHandlerAddPost}>add post</button>
