@@ -13,18 +13,30 @@ export type userReducerActionType =
 
 
 export type usersType = {
-    id: string
-    photoUrl:string
+    // id: string
+    // photoUrl:string
+    // followed: boolean
+    // fullName: string
+    // status: string
+    // location: locationType
+    name: string
+    id: number
+    uniqueUrlName: null
+    photos: photosType
+    status: null
     followed: boolean
-    fullName: string
-    status: string
-    location: locationType
+    totalCount: number
+    error: null
 }
 
-type locationType = {
-    city: string
-    country: string
+type photosType = {
+    small: null
+    large: null
 }
+// type locationType = {
+//     city: string
+//     country: string
+// }
 
 
 let initialState = {
@@ -70,11 +82,11 @@ export const userReducer = (state: initialStateType = initialState, action: user
         case "FOLLOW":
             return {
                 ...state, users: state.users.map(el => {
-                        if (el.id === action.userID) {
-                            return {...el, followed: true}
-                        }
-                        return el
-                    })
+                    if (el.id === action.userID) {
+                        return {...el, followed: true}
+                    }
+                    return el
+                })
             }
         case "UNFOLLOW":
             return {
@@ -94,14 +106,14 @@ export const userReducer = (state: initialStateType = initialState, action: user
     }
 }
 
-export const followAC = (userID: string) => {
+export const followAC = (userID: number) => {
     return {
         type: "FOLLOW",
         userID
     } as const
 }
 
-export const unfollowAC = (userID: string) => {
+export const unfollowAC = (userID: number) => {
     return {
         type: "UNFOLLOW",
         userID

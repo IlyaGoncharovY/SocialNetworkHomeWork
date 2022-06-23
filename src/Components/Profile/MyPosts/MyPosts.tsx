@@ -5,7 +5,6 @@ import {containerPostType} from "./MyPostsContainer";
 
 
 const MyPosts = (props: containerPostType) => {
-    debugger
     let postsElement = props.posts.map(el => <Post message={el.message} likeCount={el.likeCount}
                                                    key={el.id}/>)
 
