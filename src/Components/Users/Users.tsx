@@ -45,50 +45,18 @@ export const Users = (props: containerUsersType) => {
     //         )
     //     }
     // },[])
-
+let getUsers = () => {
     if (props.users.length === 0) {
         axios.get("https://social-network.samuraijs.com/api/1.0/users")
             .then(response => {
-            props.setUsers(response.data.items)
-        })
-        // props.setUsers([
-        //         {
-        //             id: "1",
-        //             photoUrl: "https://avatars.mds.yandex.net/i?id=5670781580e23d3e5e3bc06646d52ede-7017675-images-thumbs&n=13",
-        //             followed: false,
-        //             fullName: "Ilya",
-        //             status: "Hello world 1 !",
-        //             location: {city: "Moscow", country: "Russia"}
-        //         },
-        //         {
-        //             id: "2",
-        //             photoUrl: "https://avatars.mds.yandex.net/i?id=5670781580e23d3e5e3bc06646d52ede-7017675-images-thumbs&n=13",
-        //             followed: true,
-        //             fullName: "Anastasia",
-        //             status: "Hello world 2 !",
-        //             location: {city: "Moscow", country: "Russia"}
-        //         },
-        //         {
-        //             id: "3",
-        //             photoUrl: "https://avatars.mds.yandex.net/i?id=5670781580e23d3e5e3bc06646d52ede-7017675-images-thumbs&n=13",
-        //             followed: true,
-        //             fullName: "Varvara",
-        //             status: "Hello world 3 !",
-        //             location: {city: "Moscow", country: "Russia"}
-        //         },
-        //         {
-        //             id: "4",
-        //             photoUrl: "https://avatars.mds.yandex.net/i?id=5670781580e23d3e5e3bc06646d52ede-7017675-images-thumbs&n=13",
-        //             followed: false,
-        //             fullName: "Aiki",
-        //             status: "Hello world 4 !",
-        //             location: {city: "Moscow", country: "Russia"}
-        //         }
-        //     ]
-        // )
+                props.setUsers(response.data.items)
+            })
     }
+}
+
     return (
         <div>
+            <button onClick={getUsers}>Get Users</button>
             {props.users.map(user => {
                 console.log(user)
                 return <div key={user.id}>
