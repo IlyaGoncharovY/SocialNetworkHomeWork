@@ -4,12 +4,19 @@ export type UnfollowActionType = ReturnType<typeof unfollowAC>
 
 export type SetUsersActionType = ReturnType<typeof setUsersAC>
 
+export type setCurrentPageType = ReturnType<typeof setCurrentPageAC>
+
+export type setTotalUsersCountAC = ReturnType<typeof setTotalUsersCountAC>
+
+
 export type initialStateType = typeof initialState
 
 export type userReducerActionType =
     FollowActionType |
     UnfollowActionType |
-    SetUsersActionType
+    SetUsersActionType |
+    setCurrentPageType |
+    setTotalUsersCountAC
 
 
 export type usersType = {
@@ -38,42 +45,11 @@ type photosType = {
 //     country: string
 // }
 
-
 let initialState = {
-    users: [
-        // {
-        //     id: "1",
-        //     photoUrl: "https://avatars.mds.yandex.net/i?id=5670781580e23d3e5e3bc06646d52ede-7017675-images-thumbs&n=13",
-        //     followed: false,
-        //     fullName: "Ilya",
-        //     status: "Hello world 1 !",
-        //     location: {city: "Moscow", country: "Russia"}
-        // },
-        // {
-        //     id: "2",
-        //     photoUrl: "https://avatars.mds.yandex.net/i?id=5670781580e23d3e5e3bc06646d52ede-7017675-images-thumbs&n=13",
-        //     followed: true,
-        //     fullName: "Anastasia",
-        //     status: "Hello world 2 !",
-        //     location: {city: "Moscow", country: "Russia"}
-        // },
-        // {
-        //     id: "3",
-        //     photoUrl: "https://avatars.mds.yandex.net/i?id=5670781580e23d3e5e3bc06646d52ede-7017675-images-thumbs&n=13",
-        //     followed: true,
-        //     fullName: "Varvara",
-        //     status: "Hello world 3 !",
-        //     location: {city: "Moscow", country: "Russia"}
-        // },
-        // {
-        //     id: "4",
-        //     photoUrl: "https://avatars.mds.yandex.net/i?id=5670781580e23d3e5e3bc06646d52ede-7017675-images-thumbs&n=13",
-        //     followed: false,
-        //     fullName: "Aiki",
-        //     status: "Hello world 4 !",
-        //     location: {city: "Moscow", country: "Russia"}
-        // }
-    ] as usersType[]
+    users: [] as usersType[],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 2
 }
 
 export const userReducer = (state: initialStateType = initialState, action: userReducerActionType): initialStateType => {
@@ -97,10 +73,19 @@ export const userReducer = (state: initialStateType = initialState, action: user
                     return el
                 })
             }
-        case "SETUSERS":
+        case "SET-USERS":
             return {
-                ...state, users: [...state.users, ...action.users]
+                ...state, users: action.users
             }
+        case "SET-CURRENT-PAGE":
+            return {
+                ...state, currentPage: action.currentPage
+            }
+        case "SET-TOTAL-USERS-COUNT":
+            return {
+                ...state, totalUsersCount: action.totalCount
+            }
+
         default:
             return state
     }
@@ -122,7 +107,20 @@ export const unfollowAC = (userID: number) => {
 
 export const setUsersAC = (users: any) => {
     return {
-        type: "SETUSERS",
+        type: "SET-USERS",
         users
+    } as const
+}
+
+export const setCurrentPageAC = (currentPage: number) => {
+    return {
+        type: "SET-CURRENT-PAGE",
+        currentPage
+    } as const
+}
+export const setTotalUsersCountAC = (totalCount: number) => {
+    return {
+        type: "SET-TOTAL-USERS-COUNT",
+        totalCount
     } as const
 }
