@@ -4,7 +4,7 @@ import s from "./Users.module.css";
 import axios from "axios";
 import {containerUsersType} from "./UsersContainer";
 
-export class UsersClass extends React.Component<containerUsersType, any> {
+export class UsersAPIComponent extends React.Component<containerUsersType, any> {
 
     // constructor(props: containerUsersType) {
     //     super(props);
@@ -52,8 +52,8 @@ export class UsersClass extends React.Component<containerUsersType, any> {
                     // if (this.props.currentPage === el && s.selectedPage) {
                     //     <span className={s.selectedPage}>{el}</span>
                     // } else {<span>{el}</span>}
-                    // @ts-ignore
-                    return <span className={this.props.currentPage === el && s.selectedPage}
+
+                    return <span className={this.props.currentPage === el ? s.selectedPage : ''}
                                  onClick={() => {
                                      this.onPageChanged(el)
                                  }}>{el}</span>
