@@ -10,6 +10,7 @@ import {Navbar} from "./Components/Navbar/Navbar";
 import {DialogsContainer} from "./Components/Dialogs/DialogsContainer";
 import {Users} from "./Components/Users/Users";
 import {UsersContainer} from "./Components/Users/UsersContainer";
+import {ProfileContainer} from "./Components/Profile/ProfileContainer";
 
 const App = () => {
     return (
@@ -20,7 +21,7 @@ const App = () => {
                 <div className={"app-wrapper-content"}>
                     <Routes>
                         <Route path="/profile"
-                               element={<Profile/>}/>
+                               element={<ProfileContainer/>}/>
                         <Route path="/dialogs"
                                element={<DialogsContainer/>}/>
                         <Route path="/users"

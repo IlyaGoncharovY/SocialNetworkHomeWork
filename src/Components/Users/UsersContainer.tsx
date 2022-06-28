@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/r-store";
-import {Dispatch} from "redux";
 import {
     followAC,
     setCurrentPageAC, setIsFetchingAC,

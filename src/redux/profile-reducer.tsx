@@ -2,11 +2,14 @@ export type AddPostActionType = ReturnType<typeof addPostAC>
 
 export type ChangeNewTextActionType = ReturnType<typeof changeNewTextAC>
 
+export type setUserProfileACType = ReturnType<typeof setUserProfileAC>
+
 export type initialStateType = typeof initialState
 
 export type profileReducerActionType =
     AddPostActionType |
-    ChangeNewTextActionType
+    ChangeNewTextActionType |
+    setUserProfileACType
 
 
 export type postsType = {
@@ -15,13 +18,39 @@ export type postsType = {
     likeCount: number
 }
 
+export type profileType = {
+    aboutMe: string,
+    contacts: profileContactsType,
+    lookingForAJob: boolean,
+    lookingForAJobDescription: string,
+    fullName: string,
+    userId: number,
+    photos: profilePhotoType
+}
+
+type profileContactsType = {
+    facebook: string,
+    website: null,
+    vk: string,
+    twitter: string,
+    instagram: string,
+    youtube: null,
+    github: string,
+    mainLink: null
+}
+
+type profilePhotoType = {
+    small: string
+    large: string
+}
 
 let initialState = {
     posts: [
         {id: "1", message: "Hello! how are you?", likeCount: 15},
         {id: "2", message: "Its my first post", likeCount: 20}
     ] as postsType[],
-    newPostText: "hello my friends!!!"
+    newPostText: "hello my friends!!!",
+    profile: {} as profileType
 }
 
 export const profileReducer = (state: initialStateType = initialState, action: profileReducerActionType): initialStateType => {
@@ -45,6 +74,12 @@ export const profileReducer = (state: initialStateType = initialState, action: p
                 newPostText: action.newText
             }
         }
+        case "SET-USER-PROFILE": {
+            return {
+                ...state,
+                profile: action.profile
+            }
+        }
         default:
             return state
     }
@@ -61,5 +96,12 @@ export const changeNewTextAC = (newText: string) => {
     return {
         type: "UPDATE-NEW-POST-TEXT",
         newText
+    } as const
+}
+
+export const setUserProfileAC = (profile: profileType) => {
+    return {
+        type: "SET-USER-PROFILE",
+        profile
     } as const
 }

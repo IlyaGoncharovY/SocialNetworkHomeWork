@@ -1,7 +1,18 @@
 import React from 'react';
 import s from "./Profile.module.css"
+import {Preloader} from "../../common/Preloader/Preloader";
+import {initialStateType, profileType} from "../../../redux/profile-reducer";
 
-export const ProfileInfo = () => {
+type ProfilePropsType = {
+    profile: profileType
+}
+
+export const ProfileInfo = (props:ProfilePropsType) => {
+    console.log(Object.keys(props.profile))
+    if (!Object.keys(props.profile).length) {
+        return <Preloader/>
+    }
+
     return (
         <div>
             <div>
@@ -10,6 +21,7 @@ export const ProfileInfo = () => {
                     alt={"avatar"} width={"600"} height={"400"}/>
             </div>
             <div className={s.descriptionBlock}>
+                <img src={props.profile.photos.large}/>
                 ava + description
             </div>
         </div>
