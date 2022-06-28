@@ -1,8 +1,8 @@
 import React from 'react';
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
-import {initialStateType, profileType} from "../../redux/profile-reducer";
-import {profileContainerType} from "./ProfileContainer";
+import {profileType} from "../../redux/profile-reducer";
+
 
 type ProfilePropsType = {
     profile: profileType

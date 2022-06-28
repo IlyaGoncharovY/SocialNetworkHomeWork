@@ -30,13 +30,13 @@ export type profileType = {
 
 type profileContactsType = {
     facebook: string,
-    website: null,
+    website: string,
     vk: string,
     twitter: string,
     instagram: string,
-    youtube: null,
+    youtube: string,
     github: string,
-    mainLink: null
+    mainLink: string
 }
 
 type profilePhotoType = {

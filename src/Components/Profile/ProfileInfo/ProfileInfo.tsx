@@ -1,14 +1,14 @@
 import React from 'react';
 import s from "./Profile.module.css"
 import {Preloader} from "../../common/Preloader/Preloader";
-import {initialStateType, profileType} from "../../../redux/profile-reducer";
+import {profileType} from "../../../redux/profile-reducer";
 
 type ProfilePropsType = {
     profile: profileType
 }
 
 export const ProfileInfo = (props:ProfilePropsType) => {
-    console.log(Object.keys(props.profile))
+    // console.log(Object.keys(props.profile))
     if (!Object.keys(props.profile).length) {
         return <Preloader/>
     }
