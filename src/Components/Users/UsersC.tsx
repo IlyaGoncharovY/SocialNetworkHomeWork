@@ -41,7 +41,7 @@ export const UsersC = (props: UsersCType) => {
                 return <div key={user.id}>
                 <span>
                     <div>
-                        <NavLink to={"/profile"}>
+                        <NavLink to={"/profile/" + user.id}>
                     <img src={user.photos.small !== null ? user.photos.small : userPhoto}
                          className={s.usersPhoto}/>
                             </NavLink>

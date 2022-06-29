@@ -1,38 +1,39 @@
 import React from 'react';
 import './App.css';
 import Header from "./Components/Header/Header";
-import Profile from "./Components/Profile/Profile";
-import {Routes, Route, BrowserRouter} from 'react-router-dom';
+import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 import {News} from "./Components/News/News";
 import {Music} from "./Components/Music/Music";
 import {Settings} from "./Components/Settings/Settings";
 import {Navbar} from "./Components/Navbar/Navbar";
 import {DialogsContainer} from "./Components/Dialogs/DialogsContainer";
-import {Users} from "./Components/Users/Users";
 import {UsersContainer} from "./Components/Users/UsersContainer";
-import {ProfileContainer} from "./Components/Profile/ProfileContainer";
+import ProfileContainer from "./Components/Profile/ProfileContainer";
 
 const App = () => {
+
     return (
         <BrowserRouter>
             <div className={"app-wrapper"}>
                 <Header/>
                 <Navbar/>
                 <div className={"app-wrapper-content"}>
-                    <Routes>
-                        <Route path="/profile"
-                               element={<ProfileContainer/>}/>
+                    <Switch>
+                        {/*<Route path="/"*/}
+                        {/*       render={() =><Redirect to={'/profile'}/>}/>*/}
+                        <Route path={'/profile/:userId?'}
+                               render={() =><ProfileContainer/>}/>
                         <Route path="/dialogs"
-                               element={<DialogsContainer/>}/>
+                               render={() =><DialogsContainer/>}/>
                         <Route path="/users"
-                               element={<UsersContainer/>}/>
+                               render={() =><UsersContainer/>}/>
                         <Route path="/news"
-                               element={<News/>}/>
+                               render={() =><News/>}/>
                         <Route path="/music"
-                               element={<Music/>}/>
+                               render={() =><Music/>}/>
                         <Route path="/settings"
-                               element={<Settings/>}/>
-                    </Routes>
+                               render={() =><Settings/>}/>
+                    </Switch>
                 </div>
             </div>
         </BrowserRouter>
