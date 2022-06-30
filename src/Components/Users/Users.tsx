@@ -1,7 +1,6 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {containerUsersType} from "./UsersContainer";
 import s from "./Users.module.css"
-import {usersType} from "../../redux/users-reducer";
 import axios from "axios";
 import userPhoto from "./../../assecs/image/avatar.webp"
 
