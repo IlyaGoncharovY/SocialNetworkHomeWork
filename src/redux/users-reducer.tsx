@@ -179,13 +179,6 @@ export const follow = (userId: number) => {
 
     return (dispatch: Dispatch) => {
         dispatch(toggleIsFollowingAC(true, userId))
-
-        // axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {}, {
-        //     withCredentials: true,
-        //     headers: {
-        //         "API-KEY": "3464b8a0-c9aa-4269-a1f1-731b09a66663"
-        //     }
-        // })
         usersAPI.follow(userId)
             .then(response => {
                 if (response.data.resultCode === 0) {
@@ -199,13 +192,6 @@ export const unFollow = (userId: number) => {
 
     return (dispatch: Dispatch) => {
         dispatch(toggleIsFollowingAC(true, userId))
-
-        // axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {}, {
-        //     withCredentials: true,
-        //     headers: {
-        //         "API-KEY": "3464b8a0-c9aa-4269-a1f1-731b09a66663"
-        //     }
-        // })
         usersAPI.unFollow(userId)
             .then(response => {
                 if (response.data.resultCode === 0) {
