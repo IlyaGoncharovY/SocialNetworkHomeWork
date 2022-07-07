@@ -17,27 +17,10 @@ type mapDispatchToPropsType = {
 
 export type profileContainerType = mapStateToPropsType & mapDispatchToPropsType
 
-// function withRouter(Component:any) {
-//     function ComponentWithRouterProp(props:any) {
-//         let location = useLocation();
-//         let navigate = useNavigate();
-//         let params = useParams();
-//         return (
-//             <Component
-//                 {...props}
-//                 router={{ location, navigate, params }}
-//             />
-//         );
-//     }
-//
-//     return ComponentWithRouterProp;
-// }
-
 class ProfileAPIContainer extends Component<profileContainerType & RouteComponentProps<{userId: string}>> {
 
     componentDidMount() {
         console.log(this.props)
-        //const {match, setUserProfile} = this.props
         let userId = +this.props.match.params.userId
         if(!userId) {
             userId = 2
@@ -50,9 +33,7 @@ class ProfileAPIContainer extends Component<profileContainerType & RouteComponen
 
     render() {
         return (
-           // <div>
                 <Profile {...this.props}  profile={this.props.profile}/>
-           // </div>
         );
     };
 }
@@ -66,9 +47,4 @@ export default compose<ComponentType>(
     withRouter,
 )(ProfileAPIContainer)
 
-//  let withUrlDataContainerComponent = withRouter(ProfileAPIContainer)
-//
-// export const ProfileContainer = connect(mapStateToProps, {
-//     setUserProfile: setUserProfileAC
-// })(withUrlDataContainerComponent)
 

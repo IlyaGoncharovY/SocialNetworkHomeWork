@@ -45,12 +45,12 @@ export const Users = (props: containerUsersType) => {
     //     }
     // },[])
 let getUsers = () => {
-    if (props.users.length === 0) {
-        axios.get("https://social-network.samuraijs.com/api/1.0/users")
-            .then(response => {
-                props.setUsers(response.data.items)
-            })
-    }
+    // if (props.users.length === 0) {
+    //     axios.get("https://social-network.samuraijs.com/api/1.0/users")
+    //         .then(response => {
+    //             props.setUsers(response.data.items)
+    //         })
+    // }
 }
 
     return (
@@ -66,7 +66,7 @@ let getUsers = () => {
                     <div>
                         {user.followed ?
                             <button onClick={() => {
-                                props.unfollow(user.id)
+                                props.unFollow(user.id)
                             }}>Unfollow</button>
                             : <button onClick={() => {
                                 props.follow(user.id)

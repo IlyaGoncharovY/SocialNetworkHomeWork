@@ -18,7 +18,17 @@ export const usersAPI = {
         return instance.get(
             `users?page=${currentPage}&count=${pageSize}`)
             .then(response => response.data)
+    },
+    follow (userId:number) {
+     return instance.post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {}, {
+        })
+    },
+    unFollow (userId:number) {
+       return  instance.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {
+
+        })
     }
+
 }
 
 // export const getUsers = (currentPage: number, pageSize: number) => {
