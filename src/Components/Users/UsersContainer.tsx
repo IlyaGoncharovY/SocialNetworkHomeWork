@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {ComponentType} from 'react';
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/r-store";
 import {follow, getUsersThunkCreator, setCurrentPageAC, unFollow, usersType} from "../../redux/users-reducer";
 import {UsersC} from "./UsersC";
 import {Preloader} from "../common/Preloader/Preloader";
 import {AuthRedirectComponent} from "../../hoc/AuthRedirectComponent";
+import {compose} from "redux";
 
 type mapStateToPropsType = {
     users: usersType[]
@@ -12,12 +13,12 @@ type mapStateToPropsType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
-    followingInProgress:number[]
+    followingInProgress: number[]
 }
 
 type mapDispatchToPropsType = {
     setCurrentPage: (currentPage: number) => void
-    getUsers: (currentPage:number, pageSize:number)=> void
+    getUsers: (currentPage: number, pageSize: number) => void
     unFollow: (userId: number) => void
     follow: (userId: number) => void
 }
@@ -63,10 +64,18 @@ let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     }
 }
 
-export const UsersContainer = connect(mapStateToProps, {
-    setCurrentPage: setCurrentPageAC,
-    getUsers: getUsersThunkCreator,
-    follow: follow,
-    unFollow: unFollow
-})(AuthRedirectComponent(UsersC))
+// export const UsersContainer = connect(mapStateToProps, {
+//     setCurrentPage: setCurrentPageAC,
+//     getUsers: getUsersThunkCreator,
+//     follow: follow,
+//     unFollow: unFollow
+// })(UsersAPIComponent)
 
+export default compose<ComponentType>(
+    connect(mapStateToProps, {
+        follow: follow,
+        unFollow: unFollow,
+        setCurrentPage: setCurrentPageAC,
+        getUsers: getUsersThunkCreator}),
+        AuthRedirectComponent
+)(UsersAPIComponent)
