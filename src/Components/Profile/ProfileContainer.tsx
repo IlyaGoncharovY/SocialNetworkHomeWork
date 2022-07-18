@@ -3,12 +3,13 @@ import Profile from "./Profile";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/r-store";
 import {getUserProfile, profileType} from "../../redux/profile-reducer";
-import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 import {compose} from "redux";
+import {AuthRedirectComponent} from "../../hoc/AuthRedirectComponent";
 
 type mapStateToPropsType = {
     profile: profileType
-    isAuth:boolean
+    // isAuth: boolean
 }
 
 type mapDispatchToPropsType = {
@@ -17,35 +18,34 @@ type mapDispatchToPropsType = {
 
 export type profileContainerType = mapStateToPropsType & mapDispatchToPropsType
 
-class ProfileAPIContainer extends Component<profileContainerType & RouteComponentProps<{userId: string}>> {
+class ProfileAPIContainer extends Component<profileContainerType & RouteComponentProps<{ userId: string }>> {
 
     componentDidMount() {
-        console.log(this.props)
         let userId = +this.props.match.params.userId
-        if(!userId) {
+        if (!userId) {
             userId = 2
         }
-                this.props.getUserProfile(userId)
+        this.props.getUserProfile(userId)
     }
 
     render() {
-        if(!this.props.isAuth) return <Redirect to={"./login"}/>
 
-        
+        // if(!this.props.isAuth) return <Redirect to={"./login"}/>
+
         return (
-                <Profile {...this.props}  profile={this.props.profile}/>
+            <Profile {...this.props} profile={this.props.profile}/>
         );
     };
 }
 
-let mapStateToProps = (state: AppStateType):mapStateToPropsType => ({
+let mapStateToProps = (state: AppStateType): mapStateToPropsType => ({
     profile: state.profilePage.profile,
-    isAuth: state.auth.isAuth
+    // isAuth: state.auth.isAuth
 })
 
 export default compose<ComponentType>(
     connect(mapStateToProps, {getUserProfile: getUserProfile}),
-    withRouter,
-)(ProfileAPIContainer)
+    withRouter, AuthRedirectComponent
+)( ProfileAPIContainer)
 
 

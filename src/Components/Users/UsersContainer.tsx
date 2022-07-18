@@ -4,6 +4,7 @@ import {AppStateType} from "../../redux/r-store";
 import {follow, getUsersThunkCreator, setCurrentPageAC, unFollow, usersType} from "../../redux/users-reducer";
 import {UsersC} from "./UsersC";
 import {Preloader} from "../common/Preloader/Preloader";
+import {AuthRedirectComponent} from "../../hoc/AuthRedirectComponent";
 
 type mapStateToPropsType = {
     users: usersType[]
@@ -67,5 +68,5 @@ export const UsersContainer = connect(mapStateToProps, {
     getUsers: getUsersThunkCreator,
     follow: follow,
     unFollow: unFollow
-})(UsersAPIComponent)
+})(AuthRedirectComponent(UsersC))
 
