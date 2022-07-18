@@ -1,4 +1,4 @@
-import {isNumber} from "util";
+
 import {Dispatch} from "redux";
 import {usersAPI} from "../API/api";
 
@@ -171,6 +171,7 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
                 dispatch(setIsFetchingAC(false))
                 dispatch(setUsersAC(data.items))
                 dispatch(setTotalUsersCountAC(data.totalCount))
+                dispatch(setCurrentPageAC(currentPage))
             })
     }
 }

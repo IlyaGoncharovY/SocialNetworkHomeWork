@@ -21,6 +21,7 @@ type mapDispatchToPropsType = {
     getUsers: (currentPage: number, pageSize: number) => void
     unFollow: (userId: number) => void
     follow: (userId: number) => void
+    onPageChanged: (pageNumber: number) => void
 }
 
 export type containerUsersType = mapStateToPropsType & mapDispatchToPropsType

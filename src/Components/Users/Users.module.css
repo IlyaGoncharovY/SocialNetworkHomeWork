@@ -5,6 +5,10 @@
 .selectedPage {
     font-weight: bold;
 }
+.unSelectedPage {
+    font-weight: normal;
+}
+
 
 .fetchAnimation {
 
