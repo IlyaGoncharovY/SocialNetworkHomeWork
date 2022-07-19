@@ -14,25 +14,36 @@ export const usersAPI = {
             `users?page=${currentPage}&count=${pageSize}`)
             .then(response => response.data)
     },
-   // getUsers2 (currentPage: number, pageSize: number)  {
-   //      return instance.get(
-   //          `users?page=${currentPage}&count=${pageSize}`)
-   //          .then(response => response.data)
-   //  },
-    follow (userId:number) {
-     return instance.post(`follow/${userId}`, {}, {
-        })
+    // getUsers2 (currentPage: number, pageSize: number)  {
+    //      return instance.get(
+    //          `users?page=${currentPage}&count=${pageSize}`)
+    //          .then(response => response.data)
+    //  },
+    follow(userId: number) {
+        return instance.post(`follow/${userId}`, {}, {})
     },
-    unFollow (userId:number) {
-       return  instance.delete(`follow/${userId}`, {
-        })
+    unFollow(userId: number) {
+        return instance.delete(`follow/${userId}`, {})
     },
-    getProfile (userId:number) {
-      return instance.get(`profile/` + userId)
+    getProfile(userId: number) {
+        console.warn("Old method. Please profileApi obj")
+        return profileAPI.getProfile(userId)
+    }
+}
+
+export const profileAPI = {
+    getProfile(userId: number) {
+        return instance.get(`profile/` + userId)
+    },
+    getUserStatus(userId:number) {
+        return instance.get("profile/status/" + userId)
+    },
+    updateStatus(status:string) {
+        return instance.put("profile/status/", {status})
     }
 }
 export const authAPI = {
-    me () {
-     return instance.get(`auth/me`)
+    me() {
+        return instance.get(`auth/me`)
     }
 }

@@ -6,9 +6,11 @@ import {ProfileStatus} from "./ProfileStatus";
 
 type ProfilePropsType = {
     profile: profileType
+    status: string
+    updateStatus: (status: string | undefined) => void
 }
 
-export const ProfileInfo = (props:ProfilePropsType) => {
+export const ProfileInfo = (props: ProfilePropsType) => {
     // console.log(Object.keys(props.profile))
     if (!Object.keys(props.profile).length) {
         return <Preloader/>
@@ -23,7 +25,7 @@ export const ProfileInfo = (props:ProfilePropsType) => {
             {/*</div>*/}
             <div className={s.descriptionBlock}>
                 <img src={props.profile.photos.large}/>
-                <ProfileStatus status={"hello, loshara!"}/>
+                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
             </div>
         </div>
 

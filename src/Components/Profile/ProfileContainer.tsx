@@ -2,18 +2,21 @@ import React, {Component, ComponentType} from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/r-store";
-import {getUserProfile, profileType} from "../../redux/profile-reducer";
+import {getStatus, getUserProfile, profileType, updateStatus} from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {compose} from "redux";
 import {AuthRedirectComponent} from "../../hoc/AuthRedirectComponent";
 
 type mapStateToPropsType = {
     profile: profileType
+    status: string
     // isAuth: boolean
 }
 
 type mapDispatchToPropsType = {
     getUserProfile: (userId: number) => void
+    getStatus: (userId: number) => void
+    updateStatus: (status: string | undefined) => void
 }
 
 export type profileContainerType = mapStateToPropsType & mapDispatchToPropsType
@@ -26,6 +29,7 @@ class ProfileAPIContainer extends Component<profileContainerType & RouteComponen
             userId = 2
         }
         this.props.getUserProfile(userId)
+        this.props.getStatus(userId)
     }
 
     render() {
@@ -33,20 +37,29 @@ class ProfileAPIContainer extends Component<profileContainerType & RouteComponen
         // if(!this.props.isAuth) return <Redirect to={"./login"}/>
 
         return (
-            <Profile {...this.props} profile={this.props.profile}/>
+            <Profile {...this.props}
+                     profile={this.props.profile}
+                     status={this.props.status}
+                     updateStatus={this.props.updateStatus}
+            />
         );
     };
 }
 
 let mapStateToProps = (state: AppStateType): mapStateToPropsType => ({
     profile: state.profilePage.profile,
+    status: state.profilePage.status
     // isAuth: state.auth.isAuth
 })
 
 export default compose<ComponentType>(
-    connect(mapStateToProps, {getUserProfile: getUserProfile}),
+    connect(mapStateToProps, {
+        getUserProfile: getUserProfile,
+        getStatus: getStatus,
+        updateStatus: updateStatus
+    }),
     withRouter,
     // AuthRedirectComponent
-)( ProfileAPIContainer)
+)(ProfileAPIContainer)
 
 
