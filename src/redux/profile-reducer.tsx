@@ -3,7 +3,7 @@ import {profileAPI, usersAPI} from "../API/api";
 
 export type AddPostActionType = ReturnType<typeof addPostAC>
 
-export type ChangeNewTextActionType = ReturnType<typeof changeNewTextAC>
+// export type ChangeNewTextActionType = ReturnType<typeof changeNewTextAC>
 
 export type setUserProfileACType = ReturnType<typeof setUserProfileAC>
 
@@ -13,7 +13,7 @@ export type initialStateType = typeof initialState
 
 export type profileReducerActionType =
     AddPostActionType |
-    ChangeNewTextActionType |
+    // ChangeNewTextActionType |
     setUserProfileACType |
     setStatusACType
 
@@ -66,7 +66,7 @@ export const profileReducer = (state: initialStateType = initialState, action: p
         case "ADD-POST": {
             let newPost: postsType = {
                 id: "5",
-                message: action.postText,
+                message: action.newPostText,
                 likeCount: 0
             }
             return {
@@ -75,12 +75,12 @@ export const profileReducer = (state: initialStateType = initialState, action: p
                 newPostText: ""
             }
         }
-        case "UPDATE-NEW-POST-TEXT": {
-            return {
-                ...state,
-                newPostText: action.newText
-            }
-        }
+        // case "UPDATE-NEW-POST-TEXT": {
+        //     return {
+        //         ...state,
+        //         newPostText: action.newText
+        //     }
+        // }
         case "SET-STATUS": {
             return {
                 ...state,
@@ -99,10 +99,10 @@ export const profileReducer = (state: initialStateType = initialState, action: p
     }
 }
 
-export const addPostAC = (postText: string) => {
+export const addPostAC = (newPostText: string) => {
     return {
         type: "ADD-POST",
-        postText
+        newPostText
     } as const
 }
 

@@ -1,11 +1,8 @@
-export type NewMessageBodyActionType = ReturnType<typeof updateNewMessageBodyAC>
-
 export type SendMessageActionType = ReturnType<typeof sendMessageAC>
 
 export type initialStateType = typeof initialState
 
 export type messageReducerActionType =
-    NewMessageBodyActionType |
     SendMessageActionType
 
 export type messageType = {
@@ -35,16 +32,10 @@ let initialState = {
 export const dialogsReducer = (state: initialStateType = initialState, action: messageReducerActionType): initialStateType => {
 
     switch (action.type) {
-        case "UPDATE-NEW-MESSAGE-BODY":
-            return  {
-                ...state,
-                newMessageBody: action.newMessageBody
-            }
         case "SEND-MESSAGE":
-            let body = state.newMessageBody
+            let body = action.newMessageBody
             return  {
                 ...state,
-                newMessageBody: "",
                 message: [...state.message, {id: "6", message: body}]
             }
         default:
@@ -52,15 +43,10 @@ export const dialogsReducer = (state: initialStateType = initialState, action: m
     }
 }
 
-export const updateNewMessageBodyAC = (newMessageBody: string) => {
-    return {
-        type: "UPDATE-NEW-MESSAGE-BODY",
-        newMessageBody
-    } as const
-}
 
-export const sendMessageAC = () => {
+export const sendMessageAC = (newMessageBody:string) => {
     return {
-        type: "SEND-MESSAGE"
+        type: "SEND-MESSAGE",
+        newMessageBody
     } as const
 }

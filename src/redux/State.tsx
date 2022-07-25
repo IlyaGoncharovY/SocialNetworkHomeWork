@@ -1,6 +1,6 @@
 import React from "react";
-import {AddPostActionType, ChangeNewTextActionType, profileReducer} from "./profile-reducer";
-import {dialogsReducer, NewMessageBodyActionType, SendMessageActionType} from "./dialogs-reducer";
+import {AddPostActionType, /*ChangeNewTextActionType,*/ profileReducer} from "./profile-reducer";
+// import {dialogsReducer, NewMessageBodyActionType, SendMessageActionType} from "./dialogs-reducer";
 
 
 type StoreType = {
@@ -43,10 +43,12 @@ type dialogType = {
     name: string
 }
 
-type reducerAllType = AddPostActionType |
-    ChangeNewTextActionType |
-    NewMessageBodyActionType |
-    SendMessageActionType
+type reducerAllType = AddPostActionType
+    //|
+    // ChangeNewTextActionType
+    //|
+    // NewMessageBodyActionType |
+    // SendMessageActionType
 
 export const store: StoreType = {
     _state: {

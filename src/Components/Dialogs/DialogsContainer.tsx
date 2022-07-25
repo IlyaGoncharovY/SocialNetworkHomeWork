@@ -1,5 +1,5 @@
 import React from 'react';
-import {initialStateType, sendMessageAC, updateNewMessageBodyAC} from "../../redux/dialogs-reducer";
+import {initialStateType, sendMessageAC} from "../../redux/dialogs-reducer";
 import {AppStateType} from "../../redux/r-store";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
@@ -12,7 +12,6 @@ type mapStateToPropsType = {
     // isAuth:boolean
 }
 type mapDispatchToPropsType = {
-    updateNewMessageBody: (body: string) => void
     sendMessage:(body:string) => void
 }
 
@@ -28,11 +27,8 @@ let mapStateToProps = (state: AppStateType):mapStateToPropsType => {
 
 let mapDispatchToProps = (dispatch: Dispatch):mapDispatchToPropsType => {
     return {
-        updateNewMessageBody: (body:string) => {
-            dispatch(updateNewMessageBodyAC(body))
-        },
-        sendMessage: () => {
-            let action = sendMessageAC()
+        sendMessage: (newMessageBody:string) => {
+            let action = sendMessageAC(newMessageBody)
            dispatch(action)
         }
     }
