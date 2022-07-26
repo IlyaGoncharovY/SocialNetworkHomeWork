@@ -1,12 +1,10 @@
 import React from "react";
 import s from "./FormControl.module.css"
-import any = jasmine.any;
 
 
 type TextareaType = {
     input:inputType
     meta:metaType
-    children: any
 }
 type inputType = {
     name: string
@@ -36,43 +34,29 @@ type metaType = {
     warning: undefined | any
 }
 
-// const FormControl = ({input, meta, children, ...props}:TextareaType) => {
-//     debugger
-//     const hasError = meta.touched && meta.error
-//     return (
-//         <div className={s.formControl + " " + (hasError ? s.error : "")}>
-//             <div>
-//                 {/*<textarea {...input} {...props}/>*/}
-//                 {props.children}
-//             </div>
-//             {hasError && <span>{meta.error}</span>}
-//         </div>
-//     )
-// }
-
-
-export const Textarea = ({input, meta, ...props}:TextareaType) => {
+const FormControl: React.FC<TextareaType> = ({input,
+                                                 meta,
+                                                 children,
+                                                 ...props}) => {
     const hasError = meta.touched && meta.error
     return (
         <div className={s.formControl + " " + (hasError ? s.error : "")}>
             <div>
-                <textarea {...input} {...props}/>
+                {children}
             </div>
             {hasError && <span>{meta.error}</span>}
         </div>
-        // <FormControl input={input} meta={meta} child={""}><textarea {...input} {...props}/></FormControl>
+    )
+}
+
+export const Textarea = ({input, meta, ...props}:TextareaType) => {
+    return (
+         <FormControl input={input} meta={meta}><textarea {...input} {...props}/></FormControl>
     )
 }
 
 export const Input = ({input, meta, ...props}:TextareaType) => {
-    const hasError = meta.touched && meta.error
     return (
-        <div className={s.formControl + " " + (hasError ? s.error : "")}>
-            <div>
-                <input {...input} {...props}/>
-            </div>
-            {hasError && <span>{meta.error}</span>}
-        </div>
-        // <FormControl input={input} meta={meta}><input {...input} {...props}/></FormControl>
+         <FormControl input={input} meta={meta}><input {...input} {...props}/></FormControl>
     )
 }
