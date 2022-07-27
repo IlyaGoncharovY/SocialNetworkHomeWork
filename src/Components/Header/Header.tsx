@@ -4,19 +4,24 @@ import s from "./Header.module.css";
 import {dataType, getUserData} from "../../redux/auth-reducer";
 
 type HeaderType = {
-    login: string,
+    login: string
     isAuth: boolean
-    getUserData: ()=>void
+    getUserData: () => void
+    logOut: () => void
 }
 
-export const Header = (props:HeaderType) => {
+export const Header = (props: HeaderType) => {
     return (
         <header className={s.header}>
             <img className={s.header_img}
                  src="https://avatars.mds.yandex.net/i?id=3b84ba0a875426c558f8592865b5fa51-5265887-images-thumbs&n=13"
                  alt="avatar"/>
             <div className={s.loginBlock}>
-                {props.isAuth ? props.login :<NavLink to={"/login"}>Login</NavLink>}
+                {props.isAuth
+                    ? <div>{props.login}
+                        <button onClick={props.logOut}>LogOut</button>
+                    </div>
+                    : <NavLink to={"/login"}>Login</NavLink>}
             </div>
         </header>
     );

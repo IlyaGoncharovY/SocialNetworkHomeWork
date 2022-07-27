@@ -1,5 +1,6 @@
-import {Dispatch} from "redux";
+import {AnyAction} from "redux";
 import {authAPI} from "../API/api";
+import {ThunkDispatch} from "redux-thunk";
 
 export type setUserDataACType = ReturnType<typeof setUserDataAC>
 
@@ -14,7 +15,13 @@ export type dataType = {
     isAuth: boolean
 }
 
-export type cookieType ={
+export type loginType = {
+    email: string,
+    password: string,
+    rememberMe: boolean
+}
+
+export type cookieType = {
     resultCode: number
     messages: string[],
     data: dataType
@@ -28,7 +35,6 @@ let initialState = {
 }
 
 export const authReducer = (state: initialStateType = initialState, action: authReducerActionType): initialStateType => {
-
     switch (action.type) {
         case "SET-USER-DATA":
             return {
@@ -41,19 +47,39 @@ export const authReducer = (state: initialStateType = initialState, action: auth
     }
 }
 
-export const setUserDataAC = (data: dataType) => {
+export const setUserDataAC = (isAuth:boolean, data: dataType) => {
     return {
         type: "SET-USER-DATA",
-        data
+        data,
+        // isAuth: true
     } as const
 }
 
-export const getUserData = () => (dispatch: Dispatch) => {
+export const getUserData = () => (dispatch: ThunkDispatch<any, undefined, AnyAction>) => {
     authAPI.me()
         .then(response => {
             if (response.data.resultCode === 0) {
                 // let {id, login, email} = response.data
-                dispatch(setUserDataAC(response.data))
+                dispatch(setUserDataAC(true, response.data))
+            }
+        })
+}
+
+
+export const login = (formData: loginType) => (dispatch: ThunkDispatch<any, undefined, AnyAction>) => {
+    authAPI.login(formData.email, formData.password, formData.rememberMe)
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(getUserData())
+            }
+        })
+}
+
+export const logOut = () => (dispatch: ThunkDispatch<any, undefined, AnyAction>) => {
+    authAPI.logOut()
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(getUserData())
             }
         })
 }
