@@ -10,7 +10,8 @@ import {AuthRedirectComponent} from "../../hoc/AuthRedirectComponent";
 type mapStateToPropsType = {
     profile: profileType
     status: string
-    // isAuth: boolean
+    isAuth: boolean
+    logUserId: number
 }
 
 type mapDispatchToPropsType = {
@@ -26,11 +27,11 @@ class ProfileAPIContainer extends Component<profileContainerType & RouteComponen
     componentDidMount() {
         let userId = +this.props.match.params.userId
         if (!userId) {
-            userId = 23589
+            userId = this.props.logUserId
         }
         this.props.getUserProfile(userId)
         // setTimeout(() => {
-            this.props.getStatus(userId)
+        this.props.getStatus(userId)
         // }, 1000)
     }
 
@@ -50,8 +51,10 @@ class ProfileAPIContainer extends Component<profileContainerType & RouteComponen
 
 let mapStateToProps = (state: AppStateType): mapStateToPropsType => ({
     profile: state.profilePage.profile,
-    status: state.profilePage.status
+    status: state.profilePage.status,
     // isAuth: state.auth.isAuth
+    logUserId: state.auth.id,
+    isAuth: state.auth.isAuth
 })
 
 export default compose<ComponentType>(

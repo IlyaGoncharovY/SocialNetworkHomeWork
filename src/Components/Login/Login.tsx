@@ -6,6 +6,7 @@ import {login} from "../../redux/auth-reducer";
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
 import {AppStateType} from "../../redux/r-store";
+import s from "../common/FormsControls/FormControl.module.css"
 
 type FormDataType = {
     email: string
@@ -15,10 +16,10 @@ type FormDataType = {
 
 type mapDispatchToProps = {
     login: (FormData: FormDataType) => void
-    isAuth:boolean
+    isAuth: boolean
 }
 type mapStateToPropsType = {
-    isAuth:boolean
+    isAuth: boolean
 }
 // type LoginComponentType = mapDispatchToProps | mapStateToPropsType
 
@@ -41,6 +42,11 @@ const LoginForm = (props: InjectedFormProps<FormDataType>) => {
             <div>
                 <Field type={"checkbox"} name={"rememberMe"} component={Input}/> remember me
             </div>
+            {
+                props.error && <div className={s.formSummaryError}>
+                    {props.error}
+                </div>
+            }
             <div>
                 <button>Login</button>
             </div>
@@ -61,7 +67,7 @@ const Login = (props: mapDispatchToProps) => {
         console.log(formData)
     }
 
-    if(props.isAuth) {
+    if (props.isAuth) {
         return <Redirect to={"/profile"}/>
     }
 
@@ -70,7 +76,7 @@ const Login = (props: mapDispatchToProps) => {
         <LoginReduxForm onSubmit={onSubmit}/>
     </div>
 }
-let mapStateToProps = (state: AppStateType):mapStateToPropsType => {
+let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
         isAuth: state.auth.isAuth
     }
