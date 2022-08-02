@@ -1,5 +1,5 @@
 import {AppStateType} from "./r-store";
-
+// -add users-selector. previous comment, combined two comments
 export const getUsers = (state: AppStateType) => {
     return state.usersPage.users
 }
