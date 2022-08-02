@@ -28,11 +28,13 @@ class ProfileAPIContainer extends Component<profileContainerType & RouteComponen
         let userId = +this.props.match.params.userId
         if (!userId) {
             userId = this.props.logUserId
+            //----
+            if(!userId) {
+                this.props.history.push("/login")
+            }
         }
         this.props.getUserProfile(userId)
-        // setTimeout(() => {
         this.props.getStatus(userId)
-        // }, 1000)
     }
 
     render() {

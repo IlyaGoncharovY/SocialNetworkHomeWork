@@ -15,17 +15,6 @@ export const Dialogs = (props: dialogsContainerType) => {
 
     let messagesElement = state.message.map(el => <Message message={el.message} key={el.id}/>)
 
-    // let newMessageBody = state.newMessageBody
-    //
-    // let onSendMessageClick = (body: any) => {
-    //     props.sendMessage(body)
-    // }
-
-    // let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    //     let body = e.currentTarget.value
-    //     props.updateNewMessageBody(body)
-    // }
-
     let addNewMessage = (values:any) => {
         props.sendMessage(values.newMessageBody)
     }

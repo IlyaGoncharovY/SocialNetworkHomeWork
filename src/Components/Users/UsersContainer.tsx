@@ -4,8 +4,15 @@ import {AppStateType} from "../../redux/r-store";
 import {follow, getUsersThunkCreator, setCurrentPageAC, unFollow, usersType} from "../../redux/users-reducer";
 import {UsersC} from "./UsersC";
 import {Preloader} from "../common/Preloader/Preloader";
-import {AuthRedirectComponent} from "../../hoc/AuthRedirectComponent";
 import {compose} from "redux";
+import {
+    getCurrentPage,
+    getFollowingInProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalUsersCount,
+    getUsers
+} from "../../redux/users-selector";
 
 type mapStateToPropsType = {
     users: usersType[]
@@ -55,15 +62,23 @@ export class UsersAPIComponent extends React.Component<containerUsersType, any> 
 }
 
 let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
-    return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
+    // return {
+    //     users: state.usersPage.users,
+    //     pageSize: state.usersPage.pageSize,
+    //     totalUsersCount: state.usersPage.totalUsersCount,
+    //     currentPage: state.usersPage.currentPage,
+    //     isFetching: state.usersPage.isFetching,
+    //     followingInProgress: state.usersPage.followingInProgress
+    // }
+        return {
+            users: getUsers(state),
+            pageSize: getPageSize(state),
+            totalUsersCount: getTotalUsersCount(state),
+            currentPage: getCurrentPage(state),
+            isFetching: getIsFetching(state),
+            followingInProgress: getFollowingInProgress(state)
+        }
     }
-}
 
 // export const UsersContainer = connect(mapStateToProps, {
 //     setCurrentPage: setCurrentPageAC,
@@ -78,5 +93,5 @@ export default compose<ComponentType>(
         unFollow: unFollow,
         setCurrentPage: setCurrentPageAC,
         getUsers: getUsersThunkCreator}),
-        AuthRedirectComponent
+        // AuthRedirectComponent
 )(UsersAPIComponent)

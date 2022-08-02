@@ -28,9 +28,9 @@ export type cookieType = {
     data: dataType
 }
 let initialState = {
-    id: 2,
+    id: 11,
     email: 'blabla@bla.bla',
-    login: 'samurai',
+    login: 'Ilya',
     isAuth: false
     // isFetching: false
 }
@@ -57,7 +57,7 @@ export const setUserDataAC = (isAuth: boolean, data: dataType) => {
 }
 
 export const getUserData = () => (dispatch: ThunkDispatch<any, undefined, AnyAction>) => {
-    authAPI.me()
+   return  authAPI.me()
         .then(response => {
             if (response.data.resultCode === 0) {
                 // let {id, login, email} = response.data
@@ -75,7 +75,7 @@ export const login = (formData: loginType) => (dispatch: ThunkDispatch<any, unde
             if (response.data.resultCode === 0) {
                 dispatch(getUserData())
             } else {
-               let message = response.data.messages.length > 0 ? response.data.messages[0]: "Some error"
+                let message = response.data.messages.length > 0 ? response.data.messages[0] : "Some error"
                 dispatch(stopSubmit("login", {_error: message}))
             }
         })

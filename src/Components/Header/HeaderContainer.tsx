@@ -11,16 +11,16 @@ type mapStateToPropsType = {
 }
 
 type mapDispatchToPropsType = {
-    getUserData: () => void
+    // getUserData: () => void
     logOut: () => void
 }
 
 type HeaderAPIContainerType = mapStateToPropsType & mapDispatchToPropsType
 
 export class HeaderAPIComponent extends React.Component<HeaderAPIContainerType, any> {
-    componentDidMount() {
-        this.props.getUserData()
-    }
+    // componentDidMount() {
+    //     this.props.getUserData()
+    // }
 
     render() {
         return (
@@ -35,7 +35,7 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => ({
     login: state.auth.login
 })
 export const HeaderContainer = connect(mapStateToProps, {
-    getUserData: getUserData,
+    // getUserData: getUserData,
     logOut: logOut
 })(HeaderAPIComponent)
 

@@ -6,7 +6,7 @@ import {dataType, getUserData} from "../../redux/auth-reducer";
 type HeaderType = {
     login: string
     isAuth: boolean
-    getUserData: () => void
+    // getUserData: () => void
     logOut: () => void
 }
 

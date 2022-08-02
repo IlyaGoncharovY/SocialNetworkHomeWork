@@ -1,91 +1,41 @@
 import {AnyAction} from "redux";
-import {authAPI} from "../API/api";
 import {ThunkDispatch} from "redux-thunk";
-import {stopSubmit} from "redux-form";
+import {getUserData} from "./auth-reducer";
 
-export type setUserDataACType = ReturnType<typeof setUserDataAC>
 
 export type initialStateType = typeof initialState
 
-export type authReducerActionType = setUserDataACType
+export type authReducerActionType = setInitializedACType
 
-export type dataType = {
-    userId: number,
-    email: string,
-    login: string,
-    isAuth: boolean
-}
-
-export type loginType = {
-    email: string,
-    password: string,
-    rememberMe: boolean
-}
-
-export type cookieType = {
-    resultCode: number
-    messages: string[],
-    data: dataType
-}
 let initialState = {
-    id: 2,
-    email: 'blabla@bla.bla',
-    login: 'samurai',
-    isAuth: false
-    // isFetching: false
+    initialized: false
 }
 
-export const authReducer = (state: initialStateType = initialState, action: authReducerActionType): initialStateType => {
+export const appReducer = (state: initialStateType = initialState, action: authReducerActionType): initialStateType => {
     switch (action.type) {
-        case "SET-USER-DATA":
+        case "SET-INITIALIZED": {
             return {
                 ...state,
-                ...action.data,
-                isAuth: true
+                initialized: true
             }
+        }
         default:
             return state
     }
 }
 
-export const setUserDataAC = (isAuth: boolean, data: dataType) => {
+type setInitializedACType = ReturnType<typeof setInitializedAC>
+
+export const setInitializedAC = () => {
     return {
-        type: "SET-USER-DATA",
-        data,
-        // isAuth: true
+        type: "SET-INITIALIZED"
     } as const
 }
 
-export const getUserData = () => (dispatch: ThunkDispatch<any, undefined, AnyAction>) => {
-    authAPI.me()
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                // let {id, login, email} = response.data
-                dispatch(setUserDataAC(true, response.data))
-            }
-        })
-}
+export const initializeApp = () => (dispatch: ThunkDispatch<any, undefined, AnyAction>) => {
 
-
-export const login = (formData: loginType) => (dispatch: ThunkDispatch<any, undefined, AnyAction>) => {
-
-
-    authAPI.login(formData.email, formData.password, formData.rememberMe)
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(getUserData())
-            } else {
-                let message = response.data.messages.length > 0 ? response.data.messages[0] : "Some error"
-                dispatch(stopSubmit("login", {_error: message}))
-            }
-        })
-}
-
-export const logOut = () => (dispatch: ThunkDispatch<any, undefined, AnyAction>) => {
-    authAPI.logOut()
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(getUserData())
-            }
+    Promise.all([dispatch(getUserData())])
+        .then(() => {
+            dispatch(setInitializedAC())
         })
 }
