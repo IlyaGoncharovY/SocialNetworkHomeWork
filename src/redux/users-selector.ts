@@ -1,25 +1,32 @@
 import {AppStateType} from "./r-store";
-// -add users-selector. previous comment, combined two comments
-export const getUsers = (state: AppStateType) => {
+import {createSelector} from "reselect";
+import {usersType} from "./users-reducer";
+
+const getUsersSelector = (state: AppStateType) => {
     return state.usersPage.users
 }
+
+export const getUsers = createSelector(getUsersSelector,
+    (users: usersType[]) => {
+    return users.filter(el => true)
+})
 
 export const getPageSize = (state: AppStateType) => {
     return state.usersPage.pageSize
 }
 
-export const getTotalUsersCount = (state:AppStateType) => {
-  return state.usersPage.totalUsersCount
+export const getTotalUsersCount = (state: AppStateType) => {
+    return state.usersPage.totalUsersCount
 }
 
-export const getCurrentPage = (state:AppStateType) => {
+export const getCurrentPage = (state: AppStateType) => {
     return state.usersPage.currentPage
 }
 
-export const getIsFetching = (state:AppStateType) => {
+export const getIsFetching = (state: AppStateType) => {
     return state.usersPage.isFetching
 }
 
-export const getFollowingInProgress = (state:AppStateType) => {
+export const getFollowingInProgress = (state: AppStateType) => {
     return state.usersPage.followingInProgress
 }

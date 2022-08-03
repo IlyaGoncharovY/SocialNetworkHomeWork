@@ -44,7 +44,7 @@ export class UsersAPIComponent extends React.Component<containerUsersType, any> 
     }
 
     render() {
-
+        console.log("users")
         return <>
             {this.props.isFetching ? <Preloader/> : null}
             <UsersC users={this.props.users}
@@ -62,6 +62,7 @@ export class UsersAPIComponent extends React.Component<containerUsersType, any> 
 }
 
 let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
+    console.log("MSTP!!")
     // return {
     //     users: state.usersPage.users,
     //     pageSize: state.usersPage.pageSize,
@@ -70,15 +71,15 @@ let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     //     isFetching: state.usersPage.isFetching,
     //     followingInProgress: state.usersPage.followingInProgress
     // }
-        return {
-            users: getUsers(state),
-            pageSize: getPageSize(state),
-            totalUsersCount: getTotalUsersCount(state),
-            currentPage: getCurrentPage(state),
-            isFetching: getIsFetching(state),
-            followingInProgress: getFollowingInProgress(state)
-        }
+    return {
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state)
     }
+}
 
 // export const UsersContainer = connect(mapStateToProps, {
 //     setCurrentPage: setCurrentPageAC,
@@ -92,6 +93,7 @@ export default compose<ComponentType>(
         follow: follow,
         unFollow: unFollow,
         setCurrentPage: setCurrentPageAC,
-        getUsers: getUsersThunkCreator}),
-        // AuthRedirectComponent
+        getUsers: getUsersThunkCreator
+    }),
+    // AuthRedirectComponent
 )(UsersAPIComponent)
