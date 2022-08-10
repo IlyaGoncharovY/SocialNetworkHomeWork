@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React, {memo} from 'react';
 import Post from "./Post/Post";
 import s from "./MyPosts.module.css"
 import {containerPostType} from "./MyPostsContainer";
@@ -16,6 +16,7 @@ type Values = {
 }
 
 const maxLength15 = maxLengthCreator(15)
+
 function AddNewPostForm(props: InjectedFormProps<AddNewPostFormType>) {
     return (
         <form onSubmit={props.handleSubmit}>
@@ -37,10 +38,11 @@ function AddNewPostForm(props: InjectedFormProps<AddNewPostFormType>) {
 }
 
 export const AddNewPostFormRedux = reduxForm<AddNewPostFormType>({form: "ProfileAddNewPostForm"})(AddNewPostForm)
+
 export const MyPosts = (props: containerPostType) => {
+    console.log("render MyPosts")
     let postsElement = props.posts.map(el => <Post message={el.message} likeCount={el.likeCount}
                                                    key={el.id}/>)
-
     let onAddPost = (values: Values) => {
         props.addPost(values.newPostText)
     }
@@ -57,5 +59,5 @@ export const MyPosts = (props: containerPostType) => {
             </div>
         </div>
     );
-};
+}
 
