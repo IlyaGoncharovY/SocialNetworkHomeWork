@@ -41,7 +41,7 @@ export const AddNewPostFormRedux = reduxForm<AddNewPostFormType>({form: "Profile
 
 export const MyPosts = (props: containerPostType) => {
     console.log("render MyPosts")
-    let postsElement = props.posts.map(el => <Post message={el.message} likeCount={el.likeCount}
+    let postsElement = [...props.posts].reverse().map(el => <Post message={el.message} likeCount={el.likeCount}
                                                    key={el.id}/>)
     let onAddPost = (values: Values) => {
         props.addPost(values.newPostText)
