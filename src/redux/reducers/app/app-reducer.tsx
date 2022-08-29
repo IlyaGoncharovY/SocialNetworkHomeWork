@@ -1,6 +1,6 @@
 import {AnyAction} from "redux";
 import {ThunkDispatch} from "redux-thunk";
-import {getUserData} from "./auth-reducer";
+import {getUserData} from "../auth/auth-reducer";
 
 
 export type initialStateType = typeof initialState

@@ -1,7 +1,7 @@
 import React, {ComponentType} from 'react';
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/r-store";
-import {follow, getUsersThunkCreator, setCurrentPageAC, unFollow, usersType} from "../../redux/users-reducer";
+import {follow, getUsersThunkCreator, setCurrentPageAC, unFollow, usersType} from "../../redux/reducers/users/users-reducer";
 import {UsersC} from "./UsersC";
 import {Preloader} from "../common/Preloader/Preloader";
 import {compose} from "redux";

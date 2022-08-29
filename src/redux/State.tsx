@@ -1,5 +1,5 @@
 import React from "react";
-import {AddPostActionType, /*ChangeNewTextActionType,*/ profileReducer} from "./profile-reducer";
+import {AddPostActionType, /*ChangeNewTextActionType,*/ profileReducer} from "./reducers/profile/profile-reducer";
 // import {dialogsReducer, NewMessageBodyActionType, SendMessageActionType} from "./dialogs-reducer";
 
 

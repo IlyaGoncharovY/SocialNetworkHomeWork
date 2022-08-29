@@ -2,7 +2,7 @@ import React from 'react';
 import Header from "./Header";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/r-store";
-import {getUserData, logOut} from "../../redux/auth-reducer";
+import {getUserData, logOut} from "../../redux/reducers/auth/auth-reducer";
 
 
 type mapStateToPropsType = {

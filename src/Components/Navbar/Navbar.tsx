@@ -7,16 +7,18 @@ import s from "./Navbar.module.css"
 
 export default function Navbar() {
     return (
-        <Paper sx={{width: 200, }} className={s.nav}>
-            <MenuList>
-                <MenuItem>{<NavLink to="/profile">Profile</NavLink>}</MenuItem>
-                <MenuItem>{<NavLink to="/dialogs">Messages</NavLink>}</MenuItem>
-                <MenuItem>{<NavLink to="/users">Users</NavLink>}</MenuItem>
-                <MenuItem>{<NavLink to="/news">News</NavLink>}</MenuItem>
-                <MenuItem>{<NavLink to="/music">Music</NavLink>}</MenuItem>
-                <MenuItem>{<NavLink to="/settings">Settings</NavLink>}</MenuItem>
-            </MenuList>
-        </Paper>
+        <div className={s.nav}>
+            <Paper sx={{width: 200, }} >
+                <MenuList>
+                    <MenuItem>{<NavLink to="/profile">Profile</NavLink>}</MenuItem>
+                    <MenuItem>{<NavLink to="/dialogs">Messages</NavLink>}</MenuItem>
+                    <MenuItem>{<NavLink to="/users">Users</NavLink>}</MenuItem>
+                    <MenuItem>{<NavLink to="/news">News</NavLink>}</MenuItem>
+                    <MenuItem>{<NavLink to="/music">Music</NavLink>}</MenuItem>
+                    <MenuItem>{<NavLink to="/settings">Settings</NavLink>}</MenuItem>
+                </MenuList>
+            </Paper>
+        </div>
     );
 }
 

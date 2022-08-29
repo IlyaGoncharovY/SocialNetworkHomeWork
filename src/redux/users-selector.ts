@@ -1,6 +1,6 @@
 import {AppStateType} from "./r-store";
 import {createSelector} from "reselect";
-import {usersType} from "./users-reducer";
+import {usersType} from "./reducers/users/users-reducer";
 
 const getUsersSelector = (state: AppStateType) => {
     return state.usersPage.users

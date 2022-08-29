@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {usersAPI} from "../API/api";
+import {usersAPI} from "../../../API/api";
 
 export type FollowActionType = ReturnType<typeof followSuccessAC>
 

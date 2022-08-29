@@ -1,8 +1,9 @@
 import {Dispatch} from "redux";
-import {profileAPI, usersAPI} from "../API/api";
+import {profileAPI, usersAPI} from "../../../API/api";
 
 export type AddPostActionType = ReturnType<typeof addPostAC>
 
+export type deletePostACType = ReturnType<typeof deletePostAC>
 // export type ChangeNewTextActionType = ReturnType<typeof changeNewTextAC>
 
 export type setUserProfileACType = ReturnType<typeof setUserProfileAC>
@@ -15,7 +16,8 @@ export type profileReducerActionType =
     AddPostActionType |
     // ChangeNewTextActionType |
     setUserProfileACType |
-    setStatusACType
+    setStatusACType |
+    deletePostACType
 
 
 export type postsType = {
@@ -75,6 +77,12 @@ export const profileReducer = (state: initialStateType = initialState, action: p
                 newPostText: ""
             }
         }
+        case "DELETE-POST": {
+            return {
+                ...state,
+                posts: state.posts.filter(el => el.id !== action.postId)
+            }
+        }
         // case "UPDATE-NEW-POST-TEXT": {
         //     return {
         //         ...state,
@@ -103,6 +111,13 @@ export const addPostAC = (newPostText: string) => {
     return {
         type: "ADD-POST",
         newPostText
+    } as const
+}
+
+export const deletePostAC = (postId:string)=> {
+    return {
+        type: "DELETE-POST",
+        postId
     } as const
 }
 
