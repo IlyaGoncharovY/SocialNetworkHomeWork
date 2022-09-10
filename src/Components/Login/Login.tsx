@@ -7,11 +7,18 @@ import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
 import {AppStateType} from "../../redux/r-store";
 import s from "../common/FormsControls/FormControl.module.css"
+import {useFormik} from "formik";
 
 type FormDataType = {
     email: string
     password: string
     rememberMe: boolean
+}
+
+type formikErrorType = {
+    email?: string | undefined
+    password?: string | undefined
+    rememberMe?: boolean | undefined
 }
 
 type mapDispatchToProps = {
@@ -71,10 +78,12 @@ const Login = (props: mapDispatchToProps) => {
         return <Redirect to={"/profile"}/>
     }
 
-    return <div>
-        <h1>Login</h1>
-        <LoginReduxForm onSubmit={onSubmit}/>
-    </div>
+    return (
+        <div>
+            <h1>Login</h1>
+            <LoginReduxForm onSubmit={onSubmit}/>
+        </div>
+    )
 }
 let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
