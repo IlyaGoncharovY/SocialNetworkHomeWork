@@ -1,10 +1,11 @@
 import React from "react";
 import s from "./FormControl.module.css"
+import {Field} from "redux-form";
 
 
 type TextareaType = {
-    input:inputType
-    meta:metaType
+    input: inputType
+    meta: metaType
 }
 type inputType = {
     name: string
@@ -34,10 +35,12 @@ type metaType = {
     warning: undefined | any
 }
 
-const FormControl: React.FC<TextareaType> = ({input,
+const FormControl: React.FC<TextareaType> = ({
+                                                 input,
                                                  meta,
                                                  children,
-                                                 ...props}) => {
+                                                 ...props
+                                             }) => {
     const hasError = meta.touched && meta.error
     return (
         <div className={s.formControl + " " + (hasError ? s.error : "")}>
@@ -49,14 +52,25 @@ const FormControl: React.FC<TextareaType> = ({input,
     )
 }
 
-export const Textarea = ({input, meta, ...props}:TextareaType) => {
+export const Textarea = ({input, meta, ...props}: TextareaType) => {
     return (
-         <FormControl input={input} meta={meta}><textarea {...input} {...props}/></FormControl>
+        <FormControl input={input} meta={meta}><textarea {...input} {...props}/></FormControl>
     )
 }
 
-export const Input = ({input, meta, ...props}:TextareaType) => {
+export const Input = ({input, meta, ...props}: TextareaType) => {
     return (
-         <FormControl input={input} meta={meta}><input {...input} {...props}/></FormControl>
+        <FormControl input={input} meta={meta}><input {...input} {...props}/></FormControl>
     )
 }
+
+export const createField = (placeholder: string,
+                            name: string,
+                            validate: any,
+                            component: any,
+                            props: any = {},
+                            text:string = "") =>
+    <Field placeholder={placeholder}
+           name={name}
+           validate={validate}
+           component={component}/>

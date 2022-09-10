@@ -114,7 +114,7 @@ export const addPostAC = (newPostText: string) => {
     } as const
 }
 
-export const deletePostAC = (postId:string)=> {
+export const deletePostAC = (postId: string) => {
     return {
         type: "DELETE-POST",
         postId
@@ -135,31 +135,39 @@ export const setUserProfileAC = (profile: profileType) => {
     } as const
 }
 
-export const setStatusAC = (status:string) => {
+export const setStatusAC = (status: string) => {
     return {
         type: "SET-STATUS",
         status
     } as const
 }
 
-export const getUserProfile = (userId: number) => (dispatch: Dispatch) => {
-    usersAPI.getProfile(userId)
-        .then(response => {
-            dispatch(setUserProfileAC(response.data))
-        })
+export const getUserProfile = (userId: number) => async (dispatch: Dispatch) => {
+    // usersAPI.getProfile(userId)
+    //     .then(response => {
+    //         dispatch(setUserProfileAC(response.data))
+    //     })
+    const res = await usersAPI.getProfile(userId)
+    dispatch(setUserProfileAC(res.data))
 }
-export const getStatus = (userId:number) => (dispatch: Dispatch) => {
-    profileAPI.getUserStatus(userId)
-        .then(response => {
-            dispatch(setStatusAC(response.data))
-        })
+export const getStatus = (userId: number) => async (dispatch: Dispatch) => {
+    // profileAPI.getUserStatus(userId)
+    //     .then(response => {
+    //         dispatch(setStatusAC(response.data))
+    //     })
+    const res = await profileAPI.getUserStatus(userId)
+    dispatch(setStatusAC(res.data))
 }
-export const updateStatus = (status:string) => (dispatch: Dispatch) => {
-    profileAPI.updateStatus(status)
-        .then(response => {
-            if (response.data.resultCode === 0){
-                dispatch(setStatusAC(status))
-            }
-
-        })
+export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
+    // profileAPI.updateStatus(status)
+    //     .then(response => {
+    //         if (response.data.resultCode === 0) {
+    //             dispatch(setStatusAC(status))
+    //         }
+    //
+    //     })
+    const res = await profileAPI.updateStatus(status)
+    if (res.data.resultCode === 0) {
+        dispatch(setStatusAC(status))
+    }
 }

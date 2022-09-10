@@ -37,7 +37,7 @@ let initialState = {
 
 export const authReducer = (state: initialStateType = initialState, action: authReducerActionType): initialStateType => {
     switch (action.type) {
-        case "SET-USER-DATA":
+        case "AUTH/SET-USER-DATA":
             return {
                 ...state,
                 ...action.data,
@@ -50,42 +50,55 @@ export const authReducer = (state: initialStateType = initialState, action: auth
 
 export const setUserDataAC = (isAuth: boolean, data: dataType) => {
     return {
-        type: "SET-USER-DATA",
+        type: "AUTH/SET-USER-DATA",
         data,
         // isAuth: true
     } as const
 }
 
-export const getUserData = () => (dispatch: ThunkDispatch<any, undefined, AnyAction>) => {
-   return  authAPI.me()
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                // let {id, login, email} = response.data
-                dispatch(setUserDataAC(true, response.data))
-            }
-        })
+export const getUserData = () => async (dispatch: ThunkDispatch<any, undefined, AnyAction>) => {
+    // return  authAPI.me()
+    //      .then(response => {
+    //          if (response.data.resultCode === 0) {
+    //              // let {id, login, email} = response.data
+    //              dispatch(setUserDataAC(true, response.data))
+    //          }
+    //      })
+    const res = await authAPI.me()
+    if (res.data.resultCode === 0) {
+        dispatch(setUserDataAC(true, res.data))
+    }
 }
 
 
-export const login = (formData: loginType) => (dispatch: ThunkDispatch<any, undefined, AnyAction>) => {
-
-
-    authAPI.login(formData.email, formData.password, formData.rememberMe)
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(getUserData())
-            } else {
-                let message = response.data.messages.length > 0 ? response.data.messages[0] : "Some error"
-                dispatch(stopSubmit("login", {_error: message}))
-            }
-        })
+export const login = (formData: loginType) => async (dispatch: ThunkDispatch<any, undefined, AnyAction>) => {
+    // authAPI.login(formData.email, formData.password, formData.rememberMe)
+    //     .then(response => {
+    //         if (response.data.resultCode === 0) {
+    //             dispatch(getUserData())
+    //         } else {
+    //             let message = response.data.messages.length > 0 ? response.data.messages[0] : "Some error"
+    //             dispatch(stopSubmit("login", {_error: message}))
+    //         }
+    //     })
+    const res = await authAPI.login(formData.email, formData.password, formData.rememberMe)
+    if (res.data.resultCode === 0) {
+        dispatch(getUserData())
+    } else {
+        let message = res.data.messages.length > 0 ? res.data.messages[0] : "Some error"
+        dispatch(stopSubmit("login", {_error: message}))
+    }
 }
 
-export const logOut = () => (dispatch: ThunkDispatch<any, undefined, AnyAction>) => {
-    authAPI.logOut()
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(getUserData())
-            }
-        })
+export const logOut = () => async (dispatch: ThunkDispatch<any, undefined, AnyAction>) => {
+    // authAPI.logOut()
+    //     .then(response => {
+    //         if (response.data.resultCode === 0) {
+    //             dispatch(getUserData())
+    //         }
+    //     })
+    const res = await authAPI.logOut()
+    if (res.data.resultCode === 0) {
+        dispatch(getUserData())
+    }
 }
