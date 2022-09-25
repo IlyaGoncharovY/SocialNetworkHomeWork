@@ -6,9 +6,7 @@ type ProfileStatusType = {
 }
 
 export class ProfileStatus extends React.Component<ProfileStatusType, any> {
-    // statusInputRef = useRef(null)
-    // statusInputRef = React.createRef<HTMLInputElement>()
-
+   
     state = {
         editMode: false,
         status: this.props.status
@@ -18,7 +16,6 @@ export class ProfileStatus extends React.Component<ProfileStatusType, any> {
         this.setState({
             editMode: true
         })
-        // this.forceUpdate()    ;)
     }
 
     deactivateEditMode = () => {
