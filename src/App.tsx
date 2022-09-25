@@ -10,10 +10,10 @@ import UsersContainer from "./Components/Users/UsersContainer";
 import ProfileContainer from "./Components/Profile/ProfileContainer";
 import {HeaderContainer} from "./Components/Header/HeaderContainer";
 import Login from "./Components/Login/Login";
-import {connect} from "react-redux";
+import {connect, Provider} from "react-redux";
 import {compose} from "redux";
 import {initializeApp} from "./redux/reducers/app/app-reducer";
-import {AppStateType} from "./redux/r-store";
+import {AppStateType, store} from "./redux/r-store";
 import {Preloader} from "./Components/common/Preloader/Preloader";
 
 type AppType = mapStateToPropsType & mapDispatchToProps
@@ -29,7 +29,6 @@ class App extends React.Component<AppType, any> {
             return <Preloader/>
         }
         return (
-            <BrowserRouter>
                 <div className={"app-wrapper"}>
                     <HeaderContainer/>
                     <Navbar/>
@@ -52,7 +51,6 @@ class App extends React.Component<AppType, any> {
                         </Switch>
                     </div>
                 </div>
-            </BrowserRouter>
         );
     }
 }
@@ -69,9 +67,17 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
         initialized: state.app.initialized
     }
 }
-export default compose(
+let AppContainer = compose(
     // withRouter,
     connect(mapStateToProps,
         {
             initializeApp: initializeApp
         })(App));
+
+export const SocialApp = () => {
+    return        <BrowserRouter>
+        <Provider store={store}>
+            <AppContainer/>
+        </Provider>
+    </BrowserRouter>
+}

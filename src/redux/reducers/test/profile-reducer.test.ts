@@ -1,5 +1,5 @@
 import React from "react";
-import {addPostAC, deletePostAC, initialStateType, postsType, profileReducer, profileType} from "./profile-reducer";
+import {addPostAC, deletePostAC, initialStateType, postsType, profileReducer, profileType} from "../profile/profile-reducer";
 
 let initialState: initialStateType = {
     posts: [
