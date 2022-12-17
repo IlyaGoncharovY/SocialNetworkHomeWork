@@ -57,13 +57,7 @@ export const setUserDataAC = (isAuth: boolean, data: dataType) => {
 }
 
 export const getUserData = () => async (dispatch: ThunkDispatch<any, undefined, AnyAction>) => {
-    // return  authAPI.me()
-    //      .then(response => {
-    //          if (response.data.resultCode === 0) {
-    //              // let {id, login, email} = response.data
-    //              dispatch(setUserDataAC(true, response.data))
-    //          }
-    //      })
+
     const res = await authAPI.me()
     if (res.data.resultCode === 0) {
         dispatch(setUserDataAC(true, res.data))
