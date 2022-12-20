@@ -1,7 +1,13 @@
-import React from "react";
-import {addPostAC, deletePostAC, initialStateType, postsType, profileReducer, profileType} from "../profile/profile-reducer";
+import {
+    addPostAC,
+    deletePostAC,
+    initialStateProfileType,
+    postsType,
+    profileReducer,
+    profileType
+} from "../profile/profile-reducer";
 
-let initialState: initialStateType = {
+let initialState: initialStateProfileType = {
     posts: [
         {id: "1", message: "Hello! how are you?", likeCount: 15},
         {id: "2", message: "Its my first post", likeCount: 20}

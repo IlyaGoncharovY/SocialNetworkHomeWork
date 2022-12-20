@@ -2,21 +2,26 @@ import React, {Component, ComponentType} from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/r-store";
-import {getStatus, getUserProfile, profileType, updateStatus} from "../../redux/reducers/profile/profile-reducer";
+import {
+    getStatus,
+    getUserProfile,
+    initialStateProfileType,
+    profileType,
+    updateStatus
+} from "../../redux/reducers/profile/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {compose} from "redux";
-import {AuthRedirectComponent} from "../../hoc/AuthRedirectComponent";
 
 type mapStateToPropsType = {
     profile: profileType
     status: string
     isAuth: boolean
-    logUserId: number
+    logUserId: number | null
 }
 
 type mapDispatchToPropsType = {
-    getUserProfile: (userId: number) => void
-    getStatus: (userId: number) => void
+    getUserProfile: (userId: string) => void
+    getStatus: (userId: string) => void
     updateStatus: (status: string | undefined) => void
 }
 
@@ -24,17 +29,28 @@ export type profileContainerType = mapStateToPropsType & mapDispatchToPropsType
 
 class ProfileAPIContainer extends Component<profileContainerType & RouteComponentProps<{ userId: string }>> {
 
-    componentDidMount() {
-        let userId = +this.props.match.params.userId
+    refreshProfile() {
+        let userId = this.props.match.params.userId
         if (!userId) {
-            userId = this.props.logUserId
+            userId = String(this.props.logUserId)
             //----
-            if(!userId) {
+            if (!userId) {
                 this.props.history.push("/login")
             }
         }
         this.props.getUserProfile(userId)
         this.props.getStatus(userId)
+    }
+
+
+    componentDidMount() {
+        this.refreshProfile()
+    }
+
+    componentDidUpdate(prevProps: Readonly<profileContainerType & RouteComponentProps<{ userId: string }>>, prevState: initialStateProfileType, snapshot?: any) {
+        if (this.props.match.params.userId !== prevProps.match.params.userId) {
+            this.refreshProfile()
+        }
     }
 
     render() {
@@ -46,6 +62,7 @@ class ProfileAPIContainer extends Component<profileContainerType & RouteComponen
                      profile={this.props.profile}
                      status={this.props.status}
                      updateStatus={this.props.updateStatus}
+                     isOwner={!this.props.match.params.userId}
             />
         );
     };

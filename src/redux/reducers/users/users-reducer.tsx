@@ -1,6 +1,5 @@
 import {Dispatch} from "redux";
 import {usersAPI} from "../../../API/api";
-import {dataType} from "../auth/auth-reducer";
 
 export type FollowActionType = ReturnType<typeof followSuccessAC>
 
@@ -171,11 +170,7 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number) => a
     dispatch(setIsFetchingAC(true))
     dispatch(setCurrentPageAC(currentPage))
     const data = await usersAPI.getUsers(currentPage, pageSize)
-    // .then(data => {
-    //     dispatch(setIsFetchingAC(false))
-    //     dispatch(setUsersAC(data.items))
-    //     dispatch(setTotalUsersCountAC(data.totalCount))
-    // })
+
     dispatch(setIsFetchingAC(false))
     dispatch(setUsersAC(data.items))
     dispatch(setTotalUsersCountAC(data.totalCount))
@@ -183,23 +178,11 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number) => a
 }
 
 export const follow = (userId: number) => async (dispatch: Dispatch) => {
-    // dispatch(toggleIsFollowingAC(true, userId))
-    // usersAPI.follow(userId)
-    //     .then(response => {
-    //         if (response.data.resultCode === 0) {
-    //             dispatch(followSuccessAC(userId))
-    //         }
-    //         dispatch(toggleIsFollowingAC(false, userId))
-    //     })
+
     let apiMethod = usersAPI.follow(userId)
     let actionCreator = followSuccessAC
     followUnfollowFoo(dispatch, userId, apiMethod, actionCreator)
-    // dispatch(toggleIsFollowingAC(true, userId))
-    // const response = await apiMethod
-    // if (response.data.resultCode === 0) {
-    //     dispatch(actionCreator(userId))
-    // }
-    // dispatch(toggleIsFollowingAC(false, userId))
+
 }
 
 export const unFollow = (userId: number) => async (dispatch: Dispatch) => {
@@ -207,11 +190,4 @@ export const unFollow = (userId: number) => async (dispatch: Dispatch) => {
     let actionCreator = unfollowSuccessAC
     followUnfollowFoo(dispatch, userId, apiMethod, actionCreator)
 
-    // dispatch(toggleIsFollowingAC(true, userId))
-    // let response = await apiMethod
-    //
-    // if (response.data.resultCode === 0) {
-    //     dispatch(actionCreator(userId))
-    // }
-    // dispatch(toggleIsFollowingAC(false, userId))
 }

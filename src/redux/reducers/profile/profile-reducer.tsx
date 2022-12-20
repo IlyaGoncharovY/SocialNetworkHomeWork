@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {profileAPI, usersAPI} from "../../../API/api";
+import {profileAPI} from "../../../API/api";
 
 export type AddPostActionType = ReturnType<typeof addPostAC>
 
@@ -10,7 +10,7 @@ export type setUserProfileACType = ReturnType<typeof setUserProfileAC>
 
 export type setStatusACType = ReturnType<typeof setStatusAC>
 
-export type initialStateType = typeof initialState
+export type initialStateProfileType = typeof initialState
 
 export type profileReducerActionType =
     AddPostActionType |
@@ -62,7 +62,7 @@ let initialState = {
     status: ""
 }
 
-export const profileReducer = (state: initialStateType = initialState, action: profileReducerActionType): initialStateType => {
+export const profileReducer = (state: initialStateProfileType = initialState, action: profileReducerActionType): initialStateProfileType => {
 
     switch (action.type) {
         case "ADD-POST": {
@@ -142,15 +142,15 @@ export const setStatusAC = (status: string) => {
     } as const
 }
 
-export const getUserProfile = (userId: number) => async (dispatch: Dispatch) => {
+export const getUserProfile = (userId: string) => async (dispatch: Dispatch) => {
     // usersAPI.getProfile(userId)
     //     .then(response => {
     //         dispatch(setUserProfileAC(response.data))
     //     })
-    const res = await usersAPI.getProfile(userId)
+    const res = await profileAPI.getProfile(userId)
     dispatch(setUserProfileAC(res.data))
 }
-export const getStatus = (userId: number) => async (dispatch: Dispatch) => {
+export const getStatus = (userId: string) => async (dispatch: Dispatch) => {
     // profileAPI.getUserStatus(userId)
     //     .then(response => {
     //         dispatch(setStatusAC(response.data))

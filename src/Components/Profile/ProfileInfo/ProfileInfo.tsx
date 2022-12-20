@@ -2,13 +2,14 @@ import React from 'react';
 import s from "./Profile.module.css"
 import {Preloader} from "../../common/Preloader/Preloader";
 import {profileType} from "../../../redux/reducers/profile/profile-reducer";
-import {ProfileStatus} from "./ProfileStatus";
+import userPhoto from "../../../assecs/image/avatarLogo.png";
 import {ProfileStatusWithHooks} from "./ProfileStatusWithHooks";
 
 type ProfilePropsType = {
     profile: profileType
     status: string
     updateStatus: (status: string) => void
+    isOwner: boolean
 }
 
 export const ProfileInfo = (props: ProfilePropsType) => {
@@ -25,7 +26,8 @@ export const ProfileInfo = (props: ProfilePropsType) => {
             {/*        alt={"avatar"} width={"600"} height={"400"}/>*/}
             {/*</div>*/}
             <div className={s.descriptionBlock}>
-                <img src={props.profile.photos.large}/>
+                <img src={props.profile.photos.large || userPhoto} className={s.userPhoto} alt={"user photo"}/>
+                {props.isOwner && <input type={"file"}/>}
                 {/*<ProfileStatus status={props.status}*/}
                 {/*               updateStatus={props.updateStatus}/>*/}
                 <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>

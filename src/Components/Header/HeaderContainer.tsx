@@ -2,11 +2,11 @@ import React from 'react';
 import Header from "./Header";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/r-store";
-import {getUserData, logOut} from "../../redux/reducers/auth/auth-reducer";
+import {logOut} from "../../redux/reducers/auth/auth-reducer";
 
 
 type mapStateToPropsType = {
-    login: string,
+    login: string | null,
     isAuth: boolean
 }
 
@@ -25,9 +25,9 @@ export class HeaderAPIComponent extends React.Component<HeaderAPIContainerType, 
     render() {
         return (
             <Header {...this.props}/>
-        );
+        )
     }
-};
+}
 
 
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => ({
