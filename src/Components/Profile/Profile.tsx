@@ -9,14 +9,16 @@ type ProfilePropsType = {
     status:string
     updateStatus: (status: string) => void
     isOwner: boolean
+    savePhoto: (file: File) => void
 }
 
 const Profile = React.memo((props: ProfilePropsType) => {
-    console.log("render profile")
     return (
         <div>
             <ProfileInfo profile={props.profile} status={props.status}
-                         updateStatus={props.updateStatus} isOwner={props.isOwner}/>
+                         updateStatus={props.updateStatus} isOwner={props.isOwner}
+                         savePhoto={props.savePhoto}
+            />
             <MyPostsContainer/>
         </div>
     );

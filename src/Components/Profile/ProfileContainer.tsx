@@ -7,6 +7,7 @@ import {
     getUserProfile,
     initialStateProfileType,
     profileType,
+    savePhoto,
     updateStatus
 } from "../../redux/reducers/profile/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
@@ -23,6 +24,7 @@ type mapDispatchToPropsType = {
     getUserProfile: (userId: string) => void
     getStatus: (userId: string) => void
     updateStatus: (status: string | undefined) => void
+    savePhoto: (file: File) => void
 }
 
 export type profileContainerType = mapStateToPropsType & mapDispatchToPropsType
@@ -63,6 +65,7 @@ class ProfileAPIContainer extends Component<profileContainerType & RouteComponen
                      status={this.props.status}
                      updateStatus={this.props.updateStatus}
                      isOwner={!this.props.match.params.userId}
+                     savePhoto={this.props.savePhoto}
             />
         );
     };
@@ -80,7 +83,8 @@ export default compose<ComponentType>(
     connect(mapStateToProps, {
         getUserProfile: getUserProfile,
         getStatus: getStatus,
-        updateStatus: updateStatus
+        updateStatus: updateStatus,
+        savePhoto: savePhoto
     }),
     withRouter,
     // AuthRedirectComponent

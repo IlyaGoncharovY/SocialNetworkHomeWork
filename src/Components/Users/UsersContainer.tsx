@@ -44,7 +44,6 @@ export class UsersAPIComponent extends React.Component<containerUsersType, any> 
     }
 
     render() {
-        console.log("users")
         return <>
             {this.props.isFetching ? <Preloader/> : null}
             <UsersC users={this.props.users}
@@ -62,7 +61,6 @@ export class UsersAPIComponent extends React.Component<containerUsersType, any> 
 }
 
 let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
-    console.log("MSTP!!")
     // return {
     //     users: state.usersPage.users,
     //     pageSize: state.usersPage.pageSize,

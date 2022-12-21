@@ -73,18 +73,15 @@ export const setUserDataAC = (id: number | null,
 }
 
 export const getUserData = () => async (dispatch: ThunkDispatch<any, undefined, AnyAction>) => {
-
     const res = await authAPI.me()
     let {id, email, login} = res.data
-    if (res.data.resultCode === 0) {
+    if (res.resultCode === 0) {
         dispatch(setUserDataAC(id, email, login, true))
     }
 }
 
-
 export const login = (formData: loginType) => async (dispatch: ThunkDispatch<any, undefined, AnyAction>) => {
-
-    const res = await authAPI.login(formData.email, formData.password, formData.rememberMe)
+    const res = await authAPI.login(formData)
     if (res.data.resultCode === 0) {
         dispatch(getUserData())
     } else {
@@ -94,7 +91,6 @@ export const login = (formData: loginType) => async (dispatch: ThunkDispatch<any
 }
 
 export const logOut = () => async (dispatch: ThunkDispatch<any, undefined, AnyAction>) => {
-
     const res = await authAPI.logOut()
     if (res.data.resultCode === 0) {
         dispatch(setUserDataAC(null, null, null, false))

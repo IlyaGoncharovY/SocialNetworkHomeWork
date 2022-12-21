@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import s from "./Profile.module.css"
 import {Preloader} from "../../common/Preloader/Preloader";
 import {profileType} from "../../../redux/reducers/profile/profile-reducer";
@@ -10,6 +10,7 @@ type ProfilePropsType = {
     status: string
     updateStatus: (status: string) => void
     isOwner: boolean
+    savePhoto: (file: File) => void
 }
 
 export const ProfileInfo = (props: ProfilePropsType) => {
@@ -18,22 +19,36 @@ export const ProfileInfo = (props: ProfilePropsType) => {
         return <Preloader/>
     }
 
+    const onChangeSavePhoto = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.currentTarget.files && e.currentTarget.files.length) {
+            props.savePhoto(e.currentTarget.files[0])
+        }
+    }
+
     return (
         <div>
-            {/*<div>*/}
-            {/*    <img*/}
-            {/*        src={"https://wallpapershome.ru/images/wallpapers/nochnoe-nebo-1920x1080-5k-4k-zvezdi-gori-most-novaya-zelandiya-547.jpg"}*/}
-            {/*        alt={"avatar"} width={"600"} height={"400"}/>*/}
-            {/*</div>*/}
-            <div className={s.descriptionBlock}>
-                <img src={props.profile.photos.large || userPhoto} className={s.userPhoto} alt={"user photo"}/>
-                {props.isOwner && <input type={"file"}/>}
-                {/*<ProfileStatus status={props.status}*/}
-                {/*               updateStatus={props.updateStatus}/>*/}
-                <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
-            </div>
+            {props.profile ?
+                <div className={s.descriptionBlock}>
+
+                    <img src={props.profile.photos.large || userPhoto} className={s.userPhoto} alt={"user photo"}/>
+
+                    {props.isOwner && <input type={"file"} onChange={onChangeSavePhoto}/>}
+
+                    <div>{props.profile.fullName}</div>
+
+                    <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
+
+                    <h3>Description</h3>
+
+                    <div>{props.profile.lookingForAJobDescription}</div>
+
+
+                </div>
+                : <Preloader/>
+            }
+
         </div>
 
-    );
+    )
 };
 

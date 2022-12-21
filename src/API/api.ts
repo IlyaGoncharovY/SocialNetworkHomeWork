@@ -35,21 +35,39 @@ export const profileAPI = {
     getProfile(userId: string) {
         return instance.get(`profile/` + userId)
     },
-    getUserStatus(userId:string) {
+    getUserStatus(userId: string) {
         return instance.get("profile/status/" + userId)
     },
-    updateStatus(status:string) {
+    updateStatus(status: string) {
         return instance.put("profile/status/", {status})
+    },
+    savePhoto(file: string | Blob) {
+        let  formData = new FormData()
+        formData.append("image", file)
+        return instance.put("profile/photo", formData, {
+            headers: {
+                "Content-type": "multipart/form-data"
+            }
+        })
     }
 }
 export const authAPI = {
     me() {
         return instance.get(`auth/me`)
+            .then(responce => {
+                return responce.data
+            })
     },
-    login(email:string, password:string, rememberMe = false) {
-        return instance.post(`auth/login`, {email, password, rememberMe})
+    login(data: LoginParamsType) {
+        return instance.post(`auth/login`, {data})
     },
     logOut() {
         return instance.delete(`auth/login`)
     }
+}
+
+export type LoginParamsType = {
+    email: string,
+    password: string,
+    rememberMe: boolean
 }
