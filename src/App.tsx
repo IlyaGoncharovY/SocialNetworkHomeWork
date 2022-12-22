@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {BrowserRouter, HashRouter, Route, Switch} from 'react-router-dom';
+import {HashRouter, Route} from 'react-router-dom';
 import {News} from "./Components/News/News";
 import {Music} from "./Components/Music/Music";
 import {Settings} from "./Components/Settings/Settings";
@@ -9,7 +9,7 @@ import Navbar from "./Components/Navbar/Navbar";
 import UsersContainer from "./Components/Users/UsersContainer";
 // import ProfileContainer from "./Components/Profile/ProfileContainer";
 import {HeaderContainer} from "./Components/Header/HeaderContainer";
-import Login from "./Components/Login/Login";
+import {Login} from "./Components/Login/Login";
 import {connect, Provider} from "react-redux";
 import {compose} from "redux";
 import {initializeApp} from "./redux/reducers/app/app-reducer";
@@ -37,7 +37,7 @@ class App extends React.Component<AppType, any> {
                     <HeaderContainer/>
                     <Navbar/>
                     <div className={"app-wrapper-content"}>
-                        <Switch>
+                        {/*<Switch>*/}
                             <Route path={'/profile/:userId?'}
                                    render={withSuspense(ProfileContainer)}/>
                             <Route path="/dialogs"
@@ -52,7 +52,7 @@ class App extends React.Component<AppType, any> {
                                    render={() => <Music/>}/>
                             <Route path="/settings"
                                    render={() => <Settings/>}/>
-                        </Switch>
+                        {/*</Switch>*/}
                     </div>
                 </div>
         );
@@ -79,9 +79,11 @@ let AppContainer = compose(
         })(App));
 
 export const SocialApp = () => {
-    return        <HashRouter>
-        <Provider store={store}>
-            <AppContainer/>
-        </Provider>
-    </HashRouter>
+    return (
+        <HashRouter>
+            <Provider store={store}>
+                <AppContainer/>
+            </Provider>
+        </HashRouter>
+        )
 }

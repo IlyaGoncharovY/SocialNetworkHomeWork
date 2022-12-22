@@ -1,4 +1,4 @@
-import React, {memo} from 'react';
+import React from 'react';
 import Post from "./Post/Post";
 import s from "./MyPosts.module.css"
 import {containerPostType} from "./MyPostsContainer";
@@ -40,7 +40,6 @@ function AddNewPostForm(props: InjectedFormProps<AddNewPostFormType>) {
 export const AddNewPostFormRedux = reduxForm<AddNewPostFormType>({form: "ProfileAddNewPostForm"})(AddNewPostForm)
 
 export const MyPosts = (props: containerPostType) => {
-    console.log("render MyPosts")
     let postsElement = [...props.posts].reverse().map(el => <Post message={el.message} likeCount={el.likeCount}
                                                    key={el.id}/>)
     let onAddPost = (values: Values) => {
