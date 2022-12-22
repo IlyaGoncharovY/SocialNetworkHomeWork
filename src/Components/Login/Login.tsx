@@ -1,98 +1,99 @@
 import React from 'react';
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {Input} from "../common/FormsControls/FormsControl";
-import {required} from "../../utils/validators/validator";
 import {login} from "../../redux/reducers/auth/auth-reducer";
-import {connect} from "react-redux";
+import {useSelector} from "react-redux";
 import {Redirect} from "react-router-dom";
-import {AppStateType} from "../../redux/r-store";
-import s from "../common/FormsControls/FormControl.module.css"
+import {AppStateType, useAppDispatch} from "../../redux/r-store";
 import {useFormik} from "formik";
 
-type FormDataType = {
-    email: string
-    password: string
-    rememberMe: boolean
-}
-
 type formikErrorType = {
-    email?: string | undefined
-    password?: string | undefined
-    rememberMe?: boolean | undefined
+    email?: string
+    password?: string
+    rememberMe?: boolean
 }
 
-type mapDispatchToProps = {
-    login: (FormData: FormDataType) => void
-    isAuth: boolean
-}
-type mapStateToPropsType = {
-    isAuth: boolean
-}
-// type LoginComponentType = mapDispatchToProps | mapStateToPropsType
+export const Login = () => {
 
-const LoginForm = (props: InjectedFormProps<FormDataType>) => {
-    return (
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                <Field placeholder={"email"}
-                       name={"email"}
-                       validate={[required]}
-                       component={Input}/>
-            </div>
-            <div>
-                <Field placeholder={"Password"}
-                       type={"password"}
-                       name={"password"}
-                       validate={[required]}
-                       component={Input}/>
-            </div>
-            <div>
-                <Field type={"checkbox"} name={"rememberMe"} component={Input}/> remember me
-            </div>
-            {
-                props.error && <div className={s.formSummaryError}>
-                    {props.error}
-                </div>
+    const dispatch = useAppDispatch()
+
+    const isAuth = useSelector<AppStateType, boolean>(state => state.auth.isAuth)
+    const userId = useSelector<AppStateType, number | null>(state => state.auth.id)
+
+    const formik = useFormik({
+        initialValues: {
+            email: "",
+            password: "",
+            rememberMe: false
+        },
+        onSubmit: values => {
+            dispatch(login(values))
+        },
+        validate: values => {
+            const err: formikErrorType = {}
+            if (!values.email) {
+                err.email = "Email is required"
             }
-            <div>
-                <button>Login</button>
-            </div>
-        </form>
-    )
-};
+            if (!values.password) {
+                err.password = "Email is required"
+            }
+            return err
+        }
+    })
 
-const LoginReduxForm = reduxForm<FormDataType>({
-    form: "login"
-})(LoginForm)
-
-const Login = (props: mapDispatchToProps) => {
-    // const dispatch = useAppDispatch()
-    const onSubmit = (formData: FormDataType) => {
-        // dispatch(login(email, password, rememberMe))
-        // dispatch(getUserData())
-        props.login(formData)
-        console.log(formData)
-    }
-
-    if (props.isAuth) {
-        return <Redirect to={"/profile"}/>
+    if (isAuth) {
+        return <Redirect to={`/profile/${userId}`}/>
     }
 
     return (
         <div>
-            <h1>Login</h1>
-            <LoginReduxForm onSubmit={onSubmit}/>
+            <label>
+                <p>
+                    To log in get registered <a href="https://social-network.samuraijs.com/"
+                                                target={"_blank"}>here</a>
+                </p>
+                <p>
+                    or use common test account credentials:
+                </p>
+                <p>
+                    Email: free@samuraijs.com
+                </p>
+                <p>
+                    Password: free
+                </p>
+            </label>
+            <form onSubmit={formik.handleSubmit}>
+                <div>
+                    <input type="email"
+                           name="email"
+                           placeholder="Email"
+                           onChange={formik.handleChange}
+                           value={formik.values.email}
+                    />
+                </div>
+                {formik.errors.email ? <div>{formik.errors.email}</div> : null}
+                <div>
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Password"
+                        onChange={formik.handleChange}
+                        value={formik.values.password}
+                    />
+                </div>
+                {formik.errors.password ? <div>{formik.errors.password}</div> : null}
+                <div>
+                    <input
+                        type="checkbox"
+                        name="rememberMe"
+                        checked={formik.values.rememberMe}
+                        onChange={formik.handleChange}
+                    />
+                    <span>Remember me</span>
+                </div>
+                <button type="submit">Login</button>
+            </form>
         </div>
     )
 }
-let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
-    return {
-        isAuth: state.auth.isAuth
-    }
-}
-export default connect(mapStateToProps, {login})(Login)
-
-
 
 
 
