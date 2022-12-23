@@ -3,7 +3,7 @@ import s from "./Profile.module.css"
 import {Preloader} from "../../common/Preloader/Preloader";
 import {profileType} from "../../../redux/reducers/profile/profile-reducer";
 import userPhoto from "../../../assecs/image/avatarLogo.png";
-import {ProfileStatusWithHooks} from "./ProfileStatusWithHooks";
+import {ProfileStatusWithHooks} from "./ProfileStatus/ProfileStatusWithHooks";
 
 type ProfilePropsType = {
     profile: profileType
@@ -29,19 +29,31 @@ export const ProfileInfo = (props: ProfilePropsType) => {
         <div>
             {props.profile ?
                 <div className={s.descriptionBlock}>
+                    <div>
 
-                    <img src={props.profile.photos.large || userPhoto} className={s.userPhoto} alt={"user photo"}/>
+                        <img src={props.profile.photos.large || userPhoto} className={s.userPhoto} alt={"user photo"}/>
+                            {props.isOwner &&
+                               <div>
+                                   <label className={s.labelStyle}>
+                                       <input type={"file"} onChange={onChangeSavePhoto} style={{display: "none"}}/>
+                                       Upload photo
+                                   </label>
+                               </div>
 
-                    {props.isOwner && <input type={"file"} onChange={onChangeSavePhoto}/>}
+                            }
+                        <h2 style={{paddingTop: "20px"}}>{props.profile.fullName}</h2>
 
-                    <div>{props.profile.fullName}</div>
+                        <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
 
-                    <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
+                    </div>
+                    <div>
 
-                    <h3>Description</h3>
+                        <h3>Description</h3>
+                        <div>{props.profile.lookingForAJobDescription}</div>
 
-                    <div>{props.profile.lookingForAJobDescription}</div>
+                    </div>
 
+                    <div></div>
 
                 </div>
                 : <Preloader/>
