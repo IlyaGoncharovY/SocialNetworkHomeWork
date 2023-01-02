@@ -49,7 +49,7 @@ export type profileContactsType = {
     twitter: string,
     instagram: string,
     youtube: string,
-    gitHub: string,
+    github: string,
     mainLink: string
 }
 

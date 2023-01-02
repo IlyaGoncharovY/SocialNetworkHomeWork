@@ -3,6 +3,7 @@ import {profileContactsType, profileType, saveProfile} from "../../../../redux/r
 import {useFormik} from "formik";
 import {useAppDispatch} from "../../../../redux/r-store";
 import Button from "@mui/material/Button";
+import * as Yup from 'yup';
 
 type ProfileDataFormType = {
     profile: profileType
@@ -23,7 +24,7 @@ export const ProfileDataForm = (props: ProfileDataFormType) => {
             fullName: props.profile.fullName,
             aboutMe: props.profile.aboutMe,
             contacts: {
-                gitHub: contactsForProfile.gitHub,
+                github: contactsForProfile.github,
                 vk: contactsForProfile.vk,
                 facebook: contactsForProfile.facebook,
                 instagram: contactsForProfile.instagram,
@@ -38,9 +39,25 @@ export const ProfileDataForm = (props: ProfileDataFormType) => {
             dispatch(saveProfile(values))
             props.goToEditModeHandler()
         },
-        validate: values => {
-
-        }
+        validationSchema: Yup.object({
+            lookingForAJobDescription: Yup.string()
+                .min(10, 'Must be 10 characters or less')
+                .required('Required'),
+            fullName: Yup.string()
+                .min(3, 'Must be 3 characters or less')
+                .required('Required'),
+            aboutMe:  Yup.string()
+                .min(10, 'Must be 10 characters or less')
+                .required('Required'),
+            // gitHub: Yup.string().email('Invalid email address').required('Required'),
+            // vk: Yup.string().email('Invalid email address').required('Required'),
+            // facebook: Yup.string().email('Invalid email address').required('Required'),
+            // instagram: Yup.string().email('Invalid email address').required('Required'),
+            // twitter: Yup.string().email('Invalid email address').required('Required'),
+            // website: Yup.string().email('Invalid email address').required('Required'),
+            // youtube: Yup.string().email('Invalid email address').required('Required'),
+            // mainLink: Yup.string().email('Invalid email address').required('Required'),
+        }),
     })
 
     return (
@@ -58,6 +75,8 @@ export const ProfileDataForm = (props: ProfileDataFormType) => {
                            onChange={formik.handleChange}
                            value={formik.values.fullName}
                     />
+                    {formik.touched.fullName && formik.errors.fullName &&
+                        <div style={{color: "red", opacity:"0.8"}}>{formik.errors.fullName}</div>}
                 </div>
             </div>
 
@@ -80,6 +99,8 @@ export const ProfileDataForm = (props: ProfileDataFormType) => {
                               onChange={formik.handleChange}
                               value={formik.values.lookingForAJobDescription}
                     />
+                    {formik.touched.lookingForAJobDescription && formik.errors.lookingForAJobDescription &&
+                        <div style={{color: "red", opacity:"0.8"}}>{formik.errors.lookingForAJobDescription}</div>}
                 </div>
             </div>
 
@@ -91,21 +112,25 @@ export const ProfileDataForm = (props: ProfileDataFormType) => {
                               onChange={formik.handleChange}
                               value={formik.values.aboutMe}
                     />
+                    {formik.touched.aboutMe && formik.errors.aboutMe &&
+                        <div style={{color: "red", opacity:"0.8"}}>{formik.errors.aboutMe}</div>}
                 </div>
             </div>
 
             <div>
-                <b>Contacts: </b> {Object.keys(props.profile.contacts).map(el => {
+                <b>Contacts: </b>{Object.keys(props.profile.contacts).map(el => {
                 return (
                     <div key={el}>
                         <b>{el}: </b>
                         <div>
                             <input type={"text"}
-                                   name={"contacts. " + el}
+                                   name={"contacts." + el}
                                    placeholder={el}
                                    onChange={formik.handleChange}
                                    value={formik.values.contacts[el as keyof profileContactsType]}
                             />
+                            {/*{formik.touched.contacts && formik.errors*/}
+                            {/*    ? <div style={{color: "red", opacity:"0.8"}}>{formik.errors}</div>}*/}
                         </div>
                     </div>
                 )

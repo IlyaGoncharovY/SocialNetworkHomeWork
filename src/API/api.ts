@@ -81,7 +81,7 @@ export type profileDataType = {
     contacts: contactsDataType
 }
 export type contactsDataType = {
-    gitHub: string
+    github: string
     vk: string
     facebook: string
     instagram: string

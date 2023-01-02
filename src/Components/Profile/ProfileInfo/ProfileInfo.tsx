@@ -19,7 +19,6 @@ export const ProfileInfo = (props: ProfilePropsType) => {
 
     let [editMode, setEditMode] = useState(false)
 
-    // console.log(Object.keys(props.profile))
     if (!Object.keys(props.profile).length) {
         return <Preloader/>
     }
