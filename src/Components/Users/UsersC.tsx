@@ -27,7 +27,7 @@ export const UsersC = (props: UsersCType) => {
                        onPageChanged={props.onPageChanged}
                        portionSize={10}
             />
-            <div>
+            <div style={{display: "flex", justifyContent: "space-between"}}>
                 {props.users.map(user => <User
                     key={user.id}
                     user={user}

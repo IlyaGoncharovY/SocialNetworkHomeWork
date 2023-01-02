@@ -2,6 +2,7 @@ import React from 'react';
 import {profileContactsType, profileType, saveProfile} from "../../../../redux/reducers/profile/profile-reducer";
 import {useFormik} from "formik";
 import {useAppDispatch} from "../../../../redux/r-store";
+import Button from "@mui/material/Button";
 
 type ProfileDataFormType = {
     profile: profileType
@@ -45,7 +46,7 @@ export const ProfileDataForm = (props: ProfileDataFormType) => {
     return (
         <form onSubmit={formik.handleSubmit}>
             <div>
-                <button type={"submit"}>SAVE</button>
+                <Button variant={"contained"} size={"small"} type={"submit"}>SAVE</Button>
             </div>
 
             <div>
