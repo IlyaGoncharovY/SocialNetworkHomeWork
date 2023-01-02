@@ -4,9 +4,9 @@ import './index.css';
 import {SocialApp} from './App';
 
 ReactDOM.render(
-    <React.StrictMode>
+    // <React.StrictMode>
         <SocialApp/>
-    </React.StrictMode>
+    // </React.StrictMode>
     , document.getElementById('root')
 );
 
