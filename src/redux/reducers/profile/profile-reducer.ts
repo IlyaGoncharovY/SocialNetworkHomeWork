@@ -204,7 +204,7 @@ export const saveProfile = (profile: profileDataType) => async (dispatch: Dispat
     try {
         const res = await profileAPI.saveProfile(profile)
         if (res.data.resultCode === 0) {
-            dispatch(saveProfileAC(res.data.data.profile))
+            dispatch(saveProfileAC(profile))
         }
     } catch (e) {
         console.log(e)

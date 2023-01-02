@@ -101,7 +101,8 @@ export const ProfileDataForm = (props: ProfileDataFormType) => {
                         <b>{el}: </b>
                         <div>
                             <input type={"text"}
-                                   name={"contacts." + el}
+                                   name={"contacts. " + el}
+                                   placeholder={el}
                                    onChange={formik.handleChange}
                                    value={formik.values.contacts[el as keyof profileContactsType]}
                             />
