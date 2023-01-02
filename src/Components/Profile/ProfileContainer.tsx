@@ -1,5 +1,5 @@
 import React, {Component, ComponentType} from 'react';
-import Profile from "./Profile";
+import Profile from "./Profile/Profile";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/r-store";
 import {
@@ -36,9 +36,9 @@ class ProfileAPIContainer extends Component<profileContainerType & RouteComponen
         if (!userId) {
             userId = String(this.props.logUserId)
             //----
-            if (!userId) {
-                this.props.history.push("/login")
-            }
+            // if (!userId) {
+            //     this.props.history.push("/login")
+            // }
         }
         this.props.getUserProfile(userId)
         this.props.getStatus(userId)

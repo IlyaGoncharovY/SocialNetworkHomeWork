@@ -33,7 +33,7 @@ export const ProfileStatusWithHooks = (props: ProfileStatusWithHooksType) => {
         <div className={s.ProfileStatusContainer}>
             {!editMode &&
                 <div>
-                    <span onDoubleClick={activateEditMod}>{props.status || "No status"}</span>
+                   <b>Status:</b> <span onDoubleClick={activateEditMod}>{props.status || "No status"}</span>
                 </div>
             }
             {editMode &&

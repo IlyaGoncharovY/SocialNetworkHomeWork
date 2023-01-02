@@ -1,9 +1,11 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import s from "./Profile.module.css"
 import {Preloader} from "../../common/Preloader/Preloader";
 import {profileType} from "../../../redux/reducers/profile/profile-reducer";
 import userPhoto from "../../../assecs/image/avatarLogo.png";
 import {ProfileStatusWithHooks} from "./ProfileStatus/ProfileStatusWithHooks";
+import {ProfileData} from "./ProfileData/ProfileData";
+import {ProfileDataForm} from "./ProfileData/ProfileDataForm";
 
 type ProfilePropsType = {
     profile: profileType
@@ -14,6 +16,9 @@ type ProfilePropsType = {
 }
 
 export const ProfileInfo = (props: ProfilePropsType) => {
+
+    let [editMode, setEditMode] = useState(false)
+
     // console.log(Object.keys(props.profile))
     if (!Object.keys(props.profile).length) {
         return <Preloader/>
@@ -25,6 +30,10 @@ export const ProfileInfo = (props: ProfilePropsType) => {
         }
     }
 
+    const goToEditModeHandler = () => {
+        setEditMode(!editMode)
+    }
+
     return (
         <div>
             {props.profile ?
@@ -32,26 +41,24 @@ export const ProfileInfo = (props: ProfilePropsType) => {
                     <div>
 
                         <img src={props.profile.photos.large || userPhoto} className={s.userPhoto} alt={"user photo"}/>
-                            {props.isOwner &&
-                               <div>
-                                   <label className={s.labelStyle}>
-                                       <input type={"file"} onChange={onChangeSavePhoto} style={{display: "none"}}/>
-                                       Upload photo
-                                   </label>
-                               </div>
+                        {props.isOwner &&
+                            <div>
+                                <label className={s.labelStyle}>
+                                    <input type={"file"} onChange={onChangeSavePhoto} style={{display: "none"}}/>
+                                    Upload photo
+                                </label>
+                            </div>
 
-                            }
-                        <h2 style={{paddingTop: "20px"}}>{props.profile.fullName}</h2>
+                        }
 
                         <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
 
                     </div>
-                    <div>
-
-                        <h3>Description</h3>
-                        <div>{props.profile.lookingForAJobDescription}</div>
-
-                    </div>
+                    {editMode
+                        ? <ProfileDataForm profile={props.profile} goToEditModeHandler={goToEditModeHandler}/>
+                        : <ProfileData profile={props.profile}
+                                       isOwner={props.isOwner}
+                                       goToEditMode={goToEditModeHandler}/>}
 
                     <div></div>
 
