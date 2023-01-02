@@ -49,6 +49,9 @@ export const profileAPI = {
                 "Content-type": "multipart/form-data"
             }
         })
+    },
+    saveProfile(profile: profileDataType) {
+        return instance.put("profile", profile)
     }
 }
 export const authAPI = {
@@ -67,4 +70,23 @@ export type LoginParamsType = {
     email: string,
     password: string,
     rememberMe: boolean
+}
+
+export type profileDataType = {
+    userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    aboutMe: string
+    contacts: contactsDataType
+}
+export type contactsDataType = {
+    gitHub: string
+    vk: string
+    facebook: string
+    instagram: string
+    twitter: string
+    website: string
+    youtube: string
+    mainLink: string
 }
