@@ -17,12 +17,14 @@ export const Login = () => {
 
     const isAuth = useSelector<AppStateType, boolean>(state => state.auth.isAuth)
     const userId = useSelector<AppStateType, number | null>(state => state.auth.id)
+    const captchaUrl = useSelector<AppStateType, string>(state => state.auth.captchaUrl)
 
     const formik = useFormik({
         initialValues: {
             email: "",
             password: "",
-            rememberMe: false
+            rememberMe: false,
+            captcha: ""
         },
         onSubmit: values => {
             dispatch(login(values))
@@ -88,6 +90,17 @@ export const Login = () => {
                         onChange={formik.handleChange}
                     />
                     <span>Remember me</span>
+                </div>
+                <div>
+                    {captchaUrl && <img src={captchaUrl} alt={"captcha"}/>}
+                    {captchaUrl && <div>
+                        <input type={"text"}
+                               name={"captcha"}
+                               placeholder={"Enter captcha"}
+                               onChange={formik.handleChange}
+                               value={formik.values.captcha}
+                        />
+                    </div>}
                 </div>
                 <button type="submit">Login</button>
             </form>
