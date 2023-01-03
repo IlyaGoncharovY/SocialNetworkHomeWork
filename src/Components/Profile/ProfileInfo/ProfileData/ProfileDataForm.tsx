@@ -129,8 +129,9 @@ export const ProfileDataForm = (props: ProfileDataFormType) => {
                                    onChange={formik.handleChange}
                                    value={formik.values.contacts[el as keyof profileContactsType]}
                             />
-                            {/*{formik.touched.contacts && formik.errors*/}
-                            {/*    ? <div style={{color: "red", opacity:"0.8"}}>{formik.errors}</div>}*/}
+                            {/*{formik.touched.contacts?[el] && formik.errors?[el]*/}
+                            {/*    ? <div style={{color: "red", opacity:"0.8"}}>{formik.errors?[el]}</div>
+                            : null}*/}
                         </div>
                     </div>
                 )

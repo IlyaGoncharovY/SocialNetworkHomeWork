@@ -3,7 +3,6 @@ import s from "./Dialogs.module.css"
 import {Message} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogItem";
 import {dialogsContainerType} from "./DialogsContainer";
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {AddMessageFormRedux} from "./Message/AddMessageForm";
 
 

@@ -2,6 +2,8 @@ import React from 'react';
 import {Contact} from "../Contacts/Contact";
 import {profileContactsType, profileType} from "../../../../redux/reducers/profile/profile-reducer";
 import Button from "@mui/material/Button";
+import {useSelector} from "react-redux";
+import {AppStateType} from "../../../../redux/r-store";
 
 type ProfileDataType = {
     profile: profileType
@@ -11,10 +13,12 @@ type ProfileDataType = {
 
 export const ProfileData = (props: ProfileDataType) => {
 
+    const login = useSelector<AppStateType, string | null>(state => state.auth.login)
+
     return (
         <div>
             <h3>Description</h3>
-            {props.isOwner && <div>
+            {props.isOwner && login && <div>
                 <Button variant={"contained"} size={"small"} onClick={props.goToEditMode}>edit</Button>
             </div>}
             <div style={{paddingTop: "20px"}}><b>Name</b>: {props.profile.fullName}</div>

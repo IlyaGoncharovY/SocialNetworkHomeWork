@@ -6,6 +6,8 @@ import userPhoto from "../../../assecs/image/avatarLogo.png";
 import {ProfileStatusWithHooks} from "./ProfileStatus/ProfileStatusWithHooks";
 import {ProfileData} from "./ProfileData/ProfileData";
 import {ProfileDataForm} from "./ProfileData/ProfileDataForm";
+import {useSelector} from "react-redux";
+import {AppStateType} from "../../../redux/r-store";
 
 type ProfilePropsType = {
     profile: profileType
@@ -18,6 +20,8 @@ type ProfilePropsType = {
 export const ProfileInfo = (props: ProfilePropsType) => {
 
     let [editMode, setEditMode] = useState(false)
+
+    const login = useSelector<AppStateType, string | null>(state => state.auth.login)
 
     if (!Object.keys(props.profile).length) {
         return <Preloader/>
@@ -40,7 +44,7 @@ export const ProfileInfo = (props: ProfilePropsType) => {
                     <div>
 
                         <img src={props.profile.photos.large || userPhoto} className={s.userPhoto} alt={"user photo"}/>
-                        {props.isOwner &&
+                        {props.isOwner && login &&
                             <div>
                                 <label className={s.labelStyle}>
                                     <input type={"file"} onChange={onChangeSavePhoto} style={{display: "none"}}/>
