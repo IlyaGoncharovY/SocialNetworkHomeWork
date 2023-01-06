@@ -90,7 +90,7 @@ export const getCaptchaUrlAC = (captchaUrl: string) => {
 export const getUserData = () => async (dispatch: ThunkDispatch<any, undefined, AnyAction>) => {
     try {
         const res = await authAPI.me()
-        console.log({res})
+        // console.log({res})
         let {id, email, login} = res.data.data
         if (res.data.resultCode === 0) {
             dispatch(setUserDataAC(id, email, login, true))

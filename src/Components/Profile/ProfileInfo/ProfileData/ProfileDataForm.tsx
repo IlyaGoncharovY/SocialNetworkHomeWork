@@ -46,20 +46,54 @@ export const ProfileDataForm = (props: ProfileDataFormType) => {
             fullName: Yup.string()
                 .min(3, 'Must be 3 characters or less')
                 .required('Required'),
-            aboutMe:  Yup.string()
+            aboutMe: Yup.string()
                 .min(10, 'Must be 10 characters or less')
                 .required('Required'),
-            // gitHub: Yup.string().email('Invalid email address').required('Required'),
-            // vk: Yup.string().email('Invalid email address').required('Required'),
-            // facebook: Yup.string().email('Invalid email address').required('Required'),
-            // instagram: Yup.string().email('Invalid email address').required('Required'),
-            // twitter: Yup.string().email('Invalid email address').required('Required'),
-            // website: Yup.string().email('Invalid email address').required('Required'),
-            // youtube: Yup.string().email('Invalid email address').required('Required'),
-            // mainLink: Yup.string().email('Invalid email address').required('Required'),
-        }),
-    })
 
+            contacts: Yup.object().shape({
+                github: Yup.string().nullable()
+                    .matches(
+                        /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+                        'Enter correct url!'
+                    ),
+                vk: Yup.string().nullable()
+                    .matches(
+                        /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+                        'Enter correct url!'
+                    ),
+                facebook: Yup.string().nullable()
+                    .matches(
+                        /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+                        'Enter correct url!'
+                    ),
+                instagram: Yup.string().nullable()
+                    .matches(
+                        /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+                        'Enter correct url!'
+                    ),
+                twitter: Yup.string().nullable()
+                    .matches(
+                        /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+                        'Enter correct url!'
+                    ),
+                website: Yup.string().nullable()
+                    .matches(
+                        /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+                        'Enter correct url!'
+                    ),
+                youtube: Yup.string().nullable()
+                    .matches(
+                        /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+                        'Enter correct url!'
+                    ),
+                mainLink: Yup.string().nullable()
+                    .matches(
+                        /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
+                        'Enter correct url!'
+                    ),
+            })
+        })
+    })
     return (
         <form onSubmit={formik.handleSubmit}>
             <div>
@@ -76,7 +110,7 @@ export const ProfileDataForm = (props: ProfileDataFormType) => {
                            value={formik.values.fullName}
                     />
                     {formik.touched.fullName && formik.errors.fullName &&
-                        <div style={{color: "red", opacity:"0.8"}}>{formik.errors.fullName}</div>}
+                        <div style={{color: "red", opacity: "0.8"}}>{formik.errors.fullName}</div>}
                 </div>
             </div>
 
@@ -100,7 +134,7 @@ export const ProfileDataForm = (props: ProfileDataFormType) => {
                               value={formik.values.lookingForAJobDescription}
                     />
                     {formik.touched.lookingForAJobDescription && formik.errors.lookingForAJobDescription &&
-                        <div style={{color: "red", opacity:"0.8"}}>{formik.errors.lookingForAJobDescription}</div>}
+                        <div style={{color: "red", opacity: "0.8"}}>{formik.errors.lookingForAJobDescription}</div>}
                 </div>
             </div>
 
@@ -113,12 +147,16 @@ export const ProfileDataForm = (props: ProfileDataFormType) => {
                               value={formik.values.aboutMe}
                     />
                     {formik.touched.aboutMe && formik.errors.aboutMe &&
-                        <div style={{color: "red", opacity:"0.8"}}>{formik.errors.aboutMe}</div>}
+                        <div style={{color: "red", opacity: "0.8"}}>{formik.errors.aboutMe}</div>}
                 </div>
             </div>
 
             <div>
                 <b>Contacts: </b>{Object.keys(props.profile.contacts).map(el => {
+
+                const isTouched = formik.touched.contacts?.[el as keyof profileContactsType];
+                const error = formik.errors.contacts?.[el as keyof profileContactsType];
+
                 return (
                     <div key={el}>
                         <b>{el}: </b>
@@ -129,9 +167,9 @@ export const ProfileDataForm = (props: ProfileDataFormType) => {
                                    onChange={formik.handleChange}
                                    value={formik.values.contacts[el as keyof profileContactsType]}
                             />
-                            {/*{formik.touched.contacts?[el] && formik.errors?[el]*/}
-                            {/*    ? <div style={{color: "red", opacity:"0.8"}}>{formik.errors?[el]}</div>
-                            : null}*/}
+                            {isTouched && error
+                                ? <div style={{color: "red", opacity: "0.8"}}>{error}</div>
+                                : null}
                         </div>
                     </div>
                 )
