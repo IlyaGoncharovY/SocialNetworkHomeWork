@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {HashRouter, Route} from 'react-router-dom';
+import {HashRouter, Redirect, Route, Switch} from 'react-router-dom';
 import {News} from "./Components/News/News";
 import {Music} from "./Components/Music/Music";
 import {Settings} from "./Components/Settings/Settings";
@@ -25,7 +25,7 @@ type AppType = mapStateToPropsType & mapDispatchToProps
 class App extends React.Component<AppType, any> {
 
     componentDidMount() {
-       this.props.initializeApp()
+        this.props.initializeApp()
     }
 
     render() {
@@ -33,28 +33,32 @@ class App extends React.Component<AppType, any> {
             return <Preloader/>
         }
         return (
-                <div className={"app-wrapper"}>
-                    <HeaderContainer/>
-                    <Navbar/>
-                    <div className={"app-wrapper-content"}>
-                        {/*<Switch>*/}
-                            <Route path={'/profile/:userId?'}
-                                   render={withSuspense(ProfileContainer)}/>
-                            <Route path="/dialogs"
-                                   render={withSuspense(DialogsContainer)}/>
-                            <Route path="/users"
-                                   render={() => <UsersContainer/>}/>
-                            <Route path="/login"
-                                   render={() => <Login/>}/>
-                            <Route path="/news"
-                                   render={() => <News/>}/>
-                            <Route path="/music"
-                                   render={() => <Music/>}/>
-                            <Route path="/settings"
-                                   render={() => <Settings/>}/>
-                        {/*</Switch>*/}
-                    </div>
+            <div className={"app-wrapper"}>
+                <HeaderContainer/>
+                <Navbar/>
+                <div className={"app-wrapper-content"}>
+                    <Switch>
+                        <Route exact path={'/'}
+                               render={() => <Redirect to={"/profile"}/>}/>
+                        <Route path={'/profile/:userId?'}
+                               render={withSuspense(ProfileContainer)}/>
+                        <Route path="/dialogs"
+                               render={withSuspense(DialogsContainer)}/>
+                        <Route path="/users"
+                               render={() => <UsersContainer/>}/>
+                        <Route path="/login"
+                               render={() => <Login/>}/>
+                        <Route path="/news"
+                               render={() => <News/>}/>
+                        <Route path="/music"
+                               render={() => <Music/>}/>
+                        <Route path="/settings"
+                               render={() => <Settings/>}/>
+                        <Route path="*"
+                               render={() => <div><h3>404 NOT FOUND</h3></div>}/>
+                    </Switch>
                 </div>
+            </div>
         );
     }
 }
@@ -85,5 +89,5 @@ export const SocialApp = () => {
                 <AppContainer/>
             </Provider>
         </HashRouter>
-        )
+    )
 }

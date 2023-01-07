@@ -5,6 +5,8 @@ import {containerPostType} from "./MyPostsContainer";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../../utils/validators/validator";
 import {Textarea} from "../../common/FormsControls/FormsControl";
+import {useSelector} from "react-redux";
+import {AppStateType} from "../../../redux/r-store";
 
 
 type AddNewPostFormType = {
@@ -40,8 +42,11 @@ function AddNewPostForm(props: InjectedFormProps<AddNewPostFormType>) {
 export const AddNewPostFormRedux = reduxForm<AddNewPostFormType>({form: "ProfileAddNewPostForm"})(AddNewPostForm)
 
 export const MyPosts = (props: containerPostType) => {
+
+    const login = useSelector<AppStateType, string | null>(state => state.auth.login)
+
     let postsElement = [...props.posts].reverse().map(el => <Post message={el.message} likeCount={el.likeCount}
-                                                   key={el.id}/>)
+                                                                  key={el.id}/>)
     let onAddPost = (values: Values) => {
         props.addPost(values.newPostText)
     }
@@ -51,11 +56,14 @@ export const MyPosts = (props: containerPostType) => {
     // }
     return (
         <div className={s.postBlock}>
-            <h3>{props.title}</h3>
-            <AddNewPostFormRedux onSubmit={onAddPost}/>
-            <div className={s.posts}>
-                {postsElement}
+            {login && <div>
+                <h3>{props.title}</h3>
+                <AddNewPostFormRedux onSubmit={onAddPost}/>
+                <div className={s.posts}>
+                    {postsElement}
+                </div>
             </div>
+            }
         </div>
     );
 }
