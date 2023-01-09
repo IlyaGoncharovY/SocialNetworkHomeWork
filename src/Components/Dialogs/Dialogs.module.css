@@ -2,14 +2,11 @@
 /*    background-color: #9ea2a1;*/
 /*}*/
 .dialogs {
-    display: grid;
-    grid-template-rows: 60px 1fr;
-    grid-template-columns: 2fr 10fr;
-    background-color: #9ea2a1;
+    display: flex;
 }
 
 .dialogsItems {
-    padding: 10px;
+    padding: 30px;
     color: red;
 }
 
@@ -18,9 +15,9 @@
 }
 
 .messages {
-    padding: 10px;
+    padding: 30px;
 }
 
 .messages .message {
-color:red;
+    color: red;
 }

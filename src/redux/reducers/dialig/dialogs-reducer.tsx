@@ -17,14 +17,16 @@ export type dialogType = {
 let initialState = {
     message: [
         {id: "1", message: "hello"},
-        {id: "2", message: "ho ho ho"},
-        {id: "3", message: "vnature"},
+        {id: "2", message: "hello2"},
+        {id: "3", message: "hello3"},
     ] as messageType[],
     dialog: [
         {id: "1", name: "Ilya"},
         {id: "2", name: "Nastya"},
         {id: "3", name: "Varya"},
-        {id: "4", name: "Aiki"}
+        {id: "4", name: "Dmitriy"},
+        {id: "5", name: "Andrey"},
+        {id: "6", name: "Misha"}
     ] as dialogType[],
     newMessageBody: ""
 }
