@@ -14,21 +14,12 @@ export const usersAPI = {
             `users?page=${currentPage}&count=${pageSize}`)
             .then(response => response.data)
     },
-    // getUsers2 (currentPage: number, pageSize: number)  {
-    //      return instance.get(
-    //          `users?page=${currentPage}&count=${pageSize}`)
-    //          .then(response => response.data)
-    //  },
     follow(userId: number) {
         return instance.post(`follow/${userId}`, {}, {})
     },
     unFollow(userId: number) {
         return instance.delete(`follow/${userId}`, {})
     },
-    // getProfile(userId: number) {
-    //     console.warn("Old method. Please profileApi obj")
-    //     return profileAPI.getProfile(userId)
-    // }
 }
 
 export const profileAPI = {
