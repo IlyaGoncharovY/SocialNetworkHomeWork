@@ -80,7 +80,7 @@ export const profileReducer = (state: initialStateProfileType = initialState, ac
             return {
                 ...state,
                 posts: [...state.posts, newPost],
-                newPostText: ""
+                // newPostText: ""
             }
         }
         case "DELETE-POST": {
