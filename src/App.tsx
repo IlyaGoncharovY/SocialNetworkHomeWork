@@ -39,7 +39,7 @@ class App extends React.Component<AppType, any> {
                 <div className={"app-wrapper-content"}>
                     <Switch>
                         <Route exact path={'/'}
-                               render={() => <Redirect to={"/profile"}/>}/>
+                               render={() => <Redirect to={"/users"}/>}/>
                         <Route path={'/profile/:userId?'}
                                render={withSuspense(ProfileContainer)}/>
                         <Route path="/dialogs"
