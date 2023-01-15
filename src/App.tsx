@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {HashRouter, Redirect, Route, Switch} from 'react-router-dom';
+import {HashRouter, Redirect, Route, Switch, NavLink} from 'react-router-dom';
 import {News} from "./Components/News/News";
 import {Music} from "./Components/Music/Music";
 import {Settings} from "./Components/Settings/Settings";
@@ -32,6 +32,7 @@ class App extends React.Component<AppType, any> {
         if (!this.props.initialized) {
             return <Preloader/>
         }
+
         return (
             <div className={"app-wrapper"}>
                 <HeaderContainer/>
@@ -39,7 +40,7 @@ class App extends React.Component<AppType, any> {
                 <div className={"app-wrapper-content"}>
                     <Switch>
                         <Route exact path={'/'}
-                               render={() => <Redirect to={"/users"}/>}/>
+                               render={() => <Redirect to={"/profile"}/>}/>
                         <Route path={'/profile/:userId?'}
                                render={withSuspense(ProfileContainer)}/>
                         <Route path="/dialogs"
